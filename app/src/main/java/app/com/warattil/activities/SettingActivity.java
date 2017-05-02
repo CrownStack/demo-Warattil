@@ -23,8 +23,6 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
     private SharedPreferences.Editor editor;
     private SharedPreferences mSharedPreferences;
 
-    public static final String LANGUAGE_PREFERENCES = "LanguagePref";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +59,7 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
     }
 
     public void sharedPref() {
-        mSharedPreferences = getSharedPreferences(LANGUAGE_PREFERENCES, Context.MODE_PRIVATE);
+        mSharedPreferences = getSharedPreferences(getString(R.string.LANGUAGE_PREFERENCES), Context.MODE_PRIVATE);
         editor = mSharedPreferences.edit();
     }
 

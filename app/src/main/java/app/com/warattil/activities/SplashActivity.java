@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
         }, FIRST_SPLASH_TIME);
     }
 
-    private void nextActivity(){
+    private void nextActivity() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

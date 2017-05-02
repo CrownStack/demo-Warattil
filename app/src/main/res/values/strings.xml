@@ -8,4 +8,5 @@
     <string name="sheikh">Sheikh Maher Al Muaiqly</string>
     <string name="nourallah">Nourallah Mohammed Al Bebari</string>
     <string name="settings">Settings</string>
+    <string name="LANGUAGE_PREFERENCES">LanguagePref</string>
 </resources>
