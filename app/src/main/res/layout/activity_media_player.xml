@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:orientation="vertical">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        <Button
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"/>
+
+        <TextView
+                android:id="@+id/text_view_playing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/colorCoralTree"
+                android:layout_toRightOf="@+id/button_back"
+                android:textSize="18sp"
+                android:text="@string/nowPlaying"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/setting_icon"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_launcher_app"/>
+
+        <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:scrollbarTrackHorizontal="@color/colorWhite"
+                />
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorCoralTree"
+                    android:textSize="18sp"
+                    android:layout_marginRight="30dp"
+                    android:layout_alignParentRight="true"
+                    android:text="2.5"/>
+
+        </RelativeLayout>
+
+        <TextView
+                android:id="@+id/text_view_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/surah_title"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                />
+
+        <TextView
+                android:id="@+id/text_view_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/colorCoralTree"
+                android:text="@string/sheikh_maher"
+                />
+
+    </LinearLayout>
+
+</LinearLayout>

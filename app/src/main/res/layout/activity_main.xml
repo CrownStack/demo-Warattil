@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+        android:background="@drawable/background"
+    tools:context="app.com.warattil.activities.MainActivity">
 
-    <TextView
-        android:id="@+id/text_view_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view_surah"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
 
-    <Button
-        android:id="@+id/button_fetch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textAllCaps="false"
-        android:text="FetchData"/>
+    </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+</RelativeLayout>

@@ -49,12 +49,13 @@ public class DBAdapter extends SQLiteOpenHelper {
 
     public List<SurahBean> getSurahList() {
         List<SurahBean> surahList = new ArrayList<>();
-        SurahBean surahBean = null;
+
         openDatabase();
 
         Cursor cursor = mDatabase.rawQuery(" SELECT * FROM SURAH ", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
+            SurahBean surahBean = null;
             surahBean = new SurahBean(cursor.getString(0), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
             surahList.add(surahBean);
             cursor.moveToNext();

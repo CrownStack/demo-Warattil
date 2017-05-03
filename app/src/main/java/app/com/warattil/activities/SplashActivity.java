@@ -1,6 +1,7 @@
 package app.com.warattil.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -40,9 +41,22 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-                finish();
+                retrievePreference();
             }
         }, SECOND_SPLASH_TIME);
+    }
+
+    public void retrievePreference() {
+        SharedPreferences _PREFS = getSharedPreferences(getString(R.string.LANGUAGE_PREFERENCES), MODE_PRIVATE);
+        String storedLanguage = _PREFS.getString(getString(R.string.language), null);
+        String storedReciter = _PREFS.getString(getString(R.string.reciter), null);
+
+        if(storedLanguage != null || storedReciter != null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        } else {
+            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+            finish();
+        }
     }
 }

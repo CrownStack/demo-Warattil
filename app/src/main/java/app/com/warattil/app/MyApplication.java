@@ -16,8 +16,4 @@ public class MyApplication extends Application {
 
         return sInstance;
     }
-
-    public void writeToPreference(String key, String value) {
-
-    }
 }

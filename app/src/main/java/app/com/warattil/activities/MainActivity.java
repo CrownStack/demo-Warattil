@@ -1,87 +1,55 @@
 package app.com.warattil.activities;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import app.com.warattil.R;
-import app.com.warattil.database.DBAdapter;
+import app.com.warattil.adapter.SurahAdapter;
+import app.com.warattil.helper.Message;
 import app.com.warattil.model.SurahBean;
+import app.com.warattil.utils.GetDetailAsync;
+import app.com.warattil.utils.IResponseListener;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
-    private TextView textViewResult;
-    private Button buttonFetch;
-    private DBAdapter mDbAdapter;
-    private List<SurahBean> mSurahList;
+    private List<SurahBean> mBeanList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewResult = (TextView) findViewById(R.id.text_view_result);
-        buttonFetch = (Button) findViewById(R.id.button_fetch);
-        buttonFetch.setOnClickListener(this);
-
+        fetchData();
+        initView();
         retrievePreference();
     }
 
-    private boolean copyDatabase(Context context) {
-        try {
-            InputStream inputStream = context.getAssets().open(DBAdapter.DB_NAME);
-            String outFileName = DBAdapter.DB_LOCATION + DBAdapter.DB_NAME;
-            OutputStream outputStream = new FileOutputStream(outFileName);
-            byte[] buff = new byte[1024];
-            int length = 0;
-            while ((length = inputStream.read(buff)) > 0) {
-                outputStream.write(buff, 0, length);
+    protected void fetchData() {
+        GetDetailAsync detailAsync = new GetDetailAsync(MainActivity.this, new IResponseListener() {
+            @Override
+            public void success(List<SurahBean> success) {
+                mBeanList.addAll(success);
             }
-            outputStream.flush();
-            outputStream.close();
-            Log.v("MainActivity ", "DB copied");
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        });
+
+        detailAsync.execute();
     }
 
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_fetch:
-            fetchDataFromDatabase();
-        }
-    }
-
-    public void fetchDataFromDatabase() {
-        mDbAdapter = new DBAdapter(this);
-        File database = getApplicationContext().getDatabasePath(DBAdapter.DB_NAME);
-        if(false == database.exists()) {
-            mDbAdapter.getReadableDatabase();
-            if(copyDatabase(this)) {
-                Toast.makeText(this, "Copy database successfully", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-        mSurahList = mDbAdapter.getSurahList();
-        for(SurahBean bean : mSurahList) {
-            Log.e("mSurahList", bean.getF_name());
-        }
+    private void initView() {
+        RecyclerView recyclerViewSurah = (RecyclerView) findViewById(R.id.recycle_view_surah);
+        recyclerViewSurah.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerViewSurah.setLayoutManager(mLayoutManager);
+        SurahAdapter adapter = new SurahAdapter(MainActivity.this, mBeanList);
+        recyclerViewSurah.setAdapter(adapter);
     }
 
     public void retrievePreference() {
@@ -92,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(storedLanguage != null || storedReciter != null) {
             String languageType = _PREFS.getString(getString(R.string.language), null);
             String reciterType  = _PREFS.getString(getString(R.string.reciter), null);
-            textViewResult.setText(getString(R.string.language) + ": " + languageType + " \n"
-                                 + getString(R.string.reciter)  + ": " + reciterType);
+//            Message.message(getApplicationContext(), getString(R.string.language) + ": " + languageType + " \n"
+//                    + getString(R.string.reciter)  + ": " + reciterType);
         }
     }
 }

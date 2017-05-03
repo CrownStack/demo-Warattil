@@ -9,4 +9,10 @@
     <string name="nourallah">Nourallah Mohammed Al Bebari</string>
     <string name="settings">Settings</string>
     <string name="LANGUAGE_PREFERENCES">LanguagePref</string>
+    <string name="copy_success">Copy database successfully</string>
+    <string name="copy_error">Copy database error</string>
+    <string name="pleaseWait">Please wait...</string>
+    <string name="nowPlaying">Now Playing</string>
+    <string name="surah_title">Surah Al-Fatihah</string>
+    <string name="sheikh_maher">Sheikh Maher Ab Muaiqly</string>
 </resources>
