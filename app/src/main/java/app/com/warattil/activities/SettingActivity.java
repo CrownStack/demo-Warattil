@@ -65,7 +65,7 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.button_back:
 

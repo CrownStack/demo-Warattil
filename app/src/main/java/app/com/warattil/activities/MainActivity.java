@@ -5,15 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import app.com.warattil.R;
 import app.com.warattil.adapter.SurahAdapter;
-import app.com.warattil.helper.Message;
 import app.com.warattil.model.SurahBean;
 import app.com.warattil.utils.GetDetailAsync;
 import app.com.warattil.utils.IResponseListener;
@@ -60,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         if(storedLanguage != null || storedReciter != null) {
             String languageType = _PREFS.getString(getString(R.string.language), null);
             String reciterType  = _PREFS.getString(getString(R.string.reciter), null);
-//            Message.message(getApplicationContext(), getString(R.string.language) + ": " + languageType + " \n"
-//                    + getString(R.string.reciter)  + ": " + reciterType);
         }
     }
 }

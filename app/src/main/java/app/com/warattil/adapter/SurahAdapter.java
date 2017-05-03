@@ -15,7 +15,6 @@ import java.util.List;
 import app.com.warattil.R;
 import app.com.warattil.activities.MediaPlayerActivity;
 import app.com.warattil.font.FontHelper;
-import app.com.warattil.helper.Message;
 import app.com.warattil.model.SurahBean;
 
 public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> {
