@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Warattil</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="reciter">Reciter</string>
+    <string name="sheikh">Sheikh Maher Al Muaiqly</string>
+    <string name="nourallah">Nourallah Mohammed Al Bebari</string>
+    <string name="settings">Settings</string>
+</resources>
