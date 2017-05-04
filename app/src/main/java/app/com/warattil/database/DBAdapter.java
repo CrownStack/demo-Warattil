@@ -7,15 +7,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import app.com.warattil.model.SurahBean;
 
 public class DBAdapter extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "Quran2.sqlite";
     public static final String DB_LOCATION = "/data/data/app.com.warattil/databases/";
-    public static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 1;
 
-    private Context mContext;
+    private final Context mContext;
     private SQLiteDatabase mDatabase;
 
     public DBAdapter(Context context) {
@@ -33,7 +34,7 @@ public class DBAdapter extends SQLiteOpenHelper {
 
     }
 
-    public void openDatabase() {
+    private void openDatabase() {
         String dbPath = mContext.getDatabasePath(DB_NAME).getPath();
         if(mDatabase != null && mDatabase.isOpen()) {
             return;
@@ -41,7 +42,7 @@ public class DBAdapter extends SQLiteOpenHelper {
         mDatabase = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
-    public void closeDatabase() {
+    private void closeDatabase() {
         if(mDatabase != null) {
             mDatabase.close();
         }
@@ -55,7 +56,7 @@ public class DBAdapter extends SQLiteOpenHelper {
         Cursor cursor = mDatabase.rawQuery(" SELECT * FROM SURAH ", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            SurahBean surahBean = null;
+            SurahBean surahBean;
             surahBean = new SurahBean(cursor.getString(0), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
             surahList.add(surahBean);
             cursor.moveToNext();

@@ -7,7 +7,10 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
         <Button
                 android:id="@+id/button_back"
                 android:layout_width="wrap_content"
@@ -25,6 +28,7 @@
                 android:text="@string/nowPlaying"/>
 
         <Button
+               android:id="@+id/button_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -35,23 +39,29 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_margin="35dp"
             android:orientation="vertical">
 
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/ic_launcher_app"/>
+                android:layout_height="250dp"
+                android:contentDescription="null"
+                android:background="@drawable/ic_launcher_app"/>
 
         <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:scrollbarTrackHorizontal="@color/colorWhite"
-                />
+                android:indeterminateOnly="true"
+                android:scrollbarTrackHorizontal="@color/colorCoralTree"/>
+
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
             <TextView
+                    android:id="@+id/text_view_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorCoralTree"
@@ -69,8 +79,7 @@
                 android:text="@string/surah_title"
                 android:textSize="18sp"
                 android:gravity="center"
-                android:textColor="@color/colorWhite"
-                />
+                android:textColor="@color/colorWhite"/>
 
         <TextView
                 android:id="@+id/text_view_song"
@@ -78,8 +87,46 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/colorCoralTree"
-                android:text="@string/sheikh_maher"
-                />
+                android:text="@string/sheikh_maher"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+            <Button
+                    android:id="@+id/button_shuffle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="S"/>
+            <Button
+                    android:id="@+id/button_previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/button_shuffle"
+                    android:layout_toLeftOf="@+id/button_play"
+                    android:text="pr"/>
+            <Button
+                    android:id="@+id/button_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="pl"/>
+            <Button
+                    android:id="@+id/button_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/button_play"
+                    android:layout_toLeftOf="@+id/button_repeat"
+                    android:text="ne"/>
+            <Button
+                    android:id="@+id/button_repeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="re"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

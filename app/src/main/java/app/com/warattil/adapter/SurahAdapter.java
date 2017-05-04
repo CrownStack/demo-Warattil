@@ -3,6 +3,7 @@ package app.com.warattil.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,14 @@ import app.com.warattil.model.SurahBean;
 
 public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> {
 
-    private List<SurahBean> mSurahBeans = new ArrayList<SurahBean>();
-    private Context mContext;
+    private List<SurahBean> mSurahBeans = new ArrayList<>();
+    private final String mLanguageType;
 
-    public SurahAdapter(Context context, List<SurahBean> beanList) {
+    private final Context mContext;
+
+    public SurahAdapter(Context context, String languageType, List<SurahBean> beanList) {
         this.mContext = context;
+        this.mLanguageType = languageType;
         this.mSurahBeans = beanList;
     }
 
@@ -35,17 +39,23 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
     @Override
     public SurahAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        SurahBean surahBean;
-        surahBean = mSurahBeans.get(position);
-        String language = surahBean.getTitleEnglish();
-        int id = surahBean.getId();
-         holder.mTextViewLanguage.setText(id + " " + language);
+        String language ;
+        SurahBean surahBean = mSurahBeans.get(position);
+        String id = String.valueOf(surahBean.getId());
+        if(mLanguageType.equals("Arabic")) {
+            language = surahBean.getTitleArabic();
+            holder.mTextViewLanguage.setGravity(Gravity.END);
+            holder.mTextViewLanguage.setText(id + " " +language);
+        } else {
+            holder.mTextViewLanguage.setGravity(Gravity.START);
+            language = surahBean.getTitleEnglish();
+            holder.mTextViewLanguage.setText(id + " " + language);
+        }
         holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,14 +65,19 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextViewLanguage;
-        private LinearLayout mLinearLayout;
+        private final TextView mTextViewLanguage;
+        private final LinearLayout mLinearLayout;
 
         public ViewHolder(View view) {
             super(view);
             mTextViewLanguage = (TextView) view.findViewById(R.id.text_view_item_language);
             mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_item);
-            FontHelper.setFontFace(FontHelper.FontType.FONT_MEDIUM, mTextViewLanguage);
+            FontHelper.setFontFace(mTextViewLanguage);
         }
+    }
+
+    public void updateList(List<SurahBean> list) {
+        mSurahBeans = list;
+        notifyDataSetChanged();
     }
 }
