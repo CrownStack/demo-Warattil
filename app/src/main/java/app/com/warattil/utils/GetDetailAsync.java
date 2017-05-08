@@ -46,6 +46,23 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
         ProgressHelper.stop();
     }
 
+    private void fetchDataFromDatabase() {
+        DBAdapter mDbAdapter = new DBAdapter(mContext);
+        File database = mContext.getDatabasePath(DBAdapter.DB_NAME);
+        if(!database.exists()) {
+            mDbAdapter.getReadableDatabase();
+            if(copyDatabase()) {
+                Log.e("success", mContext.getString(R.string.copy_success));
+            } else {
+                Log.e("error", mContext.getString(R.string.copy_error));
+
+                return;
+            }
+        }
+        List<SurahBean> mSurahList = mDbAdapter.getSurahList();
+        mResponseListener.success(mSurahList);
+    }
+
     private boolean copyDatabase() {
         try {
             InputStream inputStream = mContext.getAssets().open(DBAdapter.DB_NAME);
@@ -64,22 +81,5 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
             e.printStackTrace();
             return false;
         }
-    }
-
-    private void fetchDataFromDatabase() {
-        DBAdapter mDbAdapter = new DBAdapter(mContext);
-        File database = mContext.getDatabasePath(DBAdapter.DB_NAME);
-        if(!database.exists()) {
-            mDbAdapter.getReadableDatabase();
-            if(copyDatabase()) {
-                Log.e("success", mContext.getString(R.string.copy_success));
-            } else {
-                Log.e("error", mContext.getString(R.string.copy_error));
-
-                return;
-            }
-        }
-        List<SurahBean> mSurahList = mDbAdapter.getSurahList();
-        mResponseListener.success(mSurahList);
     }
 }

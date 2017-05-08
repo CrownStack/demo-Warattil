@@ -13,10 +13,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import app.com.warattil.R;
 import app.com.warattil.font.FontHelper;
+import app.com.warattil.utils.AppPreference;
+import app.com.warattil.utils.Constants;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class SettingActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class SettingActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, Constants{
 
     @BindView(R.id.button_back) Button buttonBack;
     @BindView(R.id.button_next) Button buttonNext;
@@ -42,7 +45,6 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
         ButterKnife.bind(this);
         initView();
-        sharedPref();
     }
 
     private void initView() {
@@ -50,28 +52,17 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
         FontHelper.setFontFace(buttonBack, buttonNext);
         FontHelper.setFontFace(radioButtonEnglish, radioButtonArabic, radioButtonSheikh, radioButtonNourallah);
 
-        buttonBack.setOnClickListener(this);
-        buttonNext.setOnClickListener(this);
         radioGroupLanguage.setOnCheckedChangeListener(this);
         radioGroupReciter.setOnCheckedChangeListener(this);
     }
 
-    private void sharedPref() {
-        SharedPreferences mSharedPreferences = getSharedPreferences(getString(R.string.LANGUAGE_PREFERENCES), Context.MODE_PRIVATE);
-        mEditor = mSharedPreferences.edit();
+    @OnClick(R.id.button_next)
+    void clickNext(View view){
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-
-            case R.id.button_back:
-                break;
-
-            case R.id.button_next:
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                break;
-        }
+    @OnClick(R.id.button_back)
+    void clickBack(View view){
     }
 
     @Override
@@ -80,23 +71,19 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
         switch(checkedId){
 
             case R.id.radio_button_english:
-                mEditor.putString(getString(R.string.language), getString(R.string.english));
-                mEditor.commit();
+                AppPreference.getAppPreference(SettingActivity.this).putString(PREF_LANGUAGE, PREF_LANGUAGE_ENGLISH);
                 break;
 
             case R.id.radio_button_arabic:
-                mEditor.putString(getString(R.string.language), getString(R.string.arabic));
-                mEditor.commit();
+                AppPreference.getAppPreference(SettingActivity.this).putString(PREF_LANGUAGE, PREF_LANGUAGE_ARABIC);
                 break;
 
             case R.id.radio_button_sheikh:
-                mEditor.putString(getString(R.string.reciter), getString(R.string.sheikh));
-                mEditor.commit();
+                AppPreference.getAppPreference(SettingActivity.this).putString(PREF_RECITER, PREF_RECITER_SHEIKH);
                 break;
 
             case R.id.radio_button_nourallah:
-                mEditor.putString(getString(R.string.reciter), getString(R.string.nourallah));
-                mEditor.commit();
+                AppPreference.getAppPreference(SettingActivity.this).putString(PREF_RECITER, PREF_RECITER_NOURALLAH);
                 break;
         }
     }

@@ -1,42 +1,42 @@
 package app.com.warattil.activities;
 
+import android.Manifest;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import app.com.warattil.R;
 import app.com.warattil.adapter.SurahAdapter;
 import app.com.warattil.font.FontHelper;
 import app.com.warattil.model.SurahBean;
+import app.com.warattil.permission.PermissionClass;
+import app.com.warattil.utils.AppPreference;
+import app.com.warattil.utils.Constants;
 import app.com.warattil.utils.GetDetailAsync;
 import app.com.warattil.utils.IResponseListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Constants {
 
     @BindView(R.id.recycle_view_surah) RecyclerView recyclerViewSurah;
-    @BindView(R.id.button_previous) Button buttonPrevious;
-    @BindView(R.id.button_play) Button buttonPlay;
-    @BindView(R.id.button_next) Button buttonNext;
-    @BindView(R.id.button_setting) Button buttonSetting;
-
     @BindView(R.id.edit_text_search) EditText editTextSearch;
-
     private final List<SurahBean> mBeanList = new ArrayList<>();
-
     private String mLanguageType;
+    private SurahAdapter mAdapter;
+    private String mReciterType;
 
-    private SurahAdapter adapter;
+    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    final int REQUEST_PERMISSION_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         fetchData();
         retrievePreference();
-        initView();
+        PermissionClass permission = new PermissionClass(this);
+        if(!permission.checkPermission(permissions)) {
+            permission.requestPermission(REQUEST_PERMISSION_CODE, permissions);
+        } else {
+            initView();
+        }
     }
 
     private void fetchData() {
@@ -56,8 +61,19 @@ public class MainActivity extends AppCompatActivity {
                 mBeanList.addAll(success);
             }
         });
-
         detailAsync.execute();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_PERMISSION_CODE : {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    initView();
+                }
+            }
+        }
     }
 
     private void initView() {
@@ -65,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewSurah.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewSurah.setLayoutManager(mLayoutManager);
-        adapter = new SurahAdapter(MainActivity.this, mLanguageType,  mBeanList);
-        recyclerViewSurah.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        mAdapter = new SurahAdapter(MainActivity.this, mLanguageType, mBeanList);
+        recyclerViewSurah.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
         searchFilter();
     }
 
@@ -97,17 +113,12 @@ public class MainActivity extends AppCompatActivity {
                 temp.add(bean);
             }
         }
-        adapter.updateList(temp);
+        mAdapter.updateList(temp);
     }
 
     private void retrievePreference() {
-        SharedPreferences _PREFS = getSharedPreferences(getString(R.string.LANGUAGE_PREFERENCES), MODE_PRIVATE);
-        String storedLanguage = _PREFS.getString(getString(R.string.language), null);
-        String storedReciter = _PREFS.getString(getString(R.string.reciter), null);
-
-        if(storedLanguage != null || storedReciter != null) {
-             mLanguageType = _PREFS.getString(getString(R.string.language), null);
-            String reciterType  = _PREFS.getString(getString(R.string.reciter), null);
-        }
+        mLanguageType = AppPreference.getAppPreference(MainActivity.this).getString(PREF_LANGUAGE);
+        mReciterType = AppPreference.getAppPreference(MainActivity.this).getString(PREF_RECITER);
+        Log.e("ml", mLanguageType + " " + mReciterType );
     }
 }

@@ -15,7 +15,7 @@
                 android:id="@+id/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back"/>
+                android:background="@drawable/back_button"/>
 
         <TextView
                 android:id="@+id/text_view_playing"
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/setting_icon"/>
+                android:background="@drawable/setting"/>
 
     </RelativeLayout>
 
@@ -89,44 +89,44 @@
                 android:textColor="@color/colorCoralTree"
                 android:text="@string/sheikh_maher"/>
 
-        <RelativeLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5"
                 android:layout_marginTop="30dp">
             <Button
                     android:id="@+id/button_shuffle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="S"/>
+                    android:background="@drawable/shuffle"
+                    android:layout_weight="1"/>
             <Button
                     android:id="@+id/button_previous"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/button_shuffle"
-                    android:layout_toLeftOf="@+id/button_play"
-                    android:text="pr"/>
+                    android:background="@drawable/back"
+                    android:layout_weight="1"/>
             <Button
                     android:id="@+id/button_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="pl"/>
+                    android:background="@drawable/play"
+                    android:layout_weight="1"/>
             <Button
                     android:id="@+id/button_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/button_play"
-                    android:layout_toLeftOf="@+id/button_repeat"
-                    android:text="ne"/>
+                    android:background="@drawable/next"
+                    android:layout_weight="1"/>
             <Button
                     android:id="@+id/button_repeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="re"/>
+                    android:background="@drawable/repeat"
+                    android:layout_weight="1"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
