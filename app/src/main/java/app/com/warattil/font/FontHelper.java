@@ -15,7 +15,7 @@ public enum FontType {
     FONT_MEDIUM("fonts/Roboto-Medium.ttf"),
     FONT_REGULAR("fonts/Roboto-Regular.ttf");
 
-    private String type;
+    private final String type;
 
     FontType(String type) {
         this.type = type;
@@ -35,8 +35,9 @@ public enum FontType {
     }
 }
 
-    public static void setFontFace(FontType fontType, TextView... textViews) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(fontType));
+    public static void setFontFace(TextView... textViews) {
+        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
+                FontType.FONT_MEDIUM));
         for(TextView textView : textViews) {
             textView.setTypeface(type);
         }
@@ -49,15 +50,17 @@ public enum FontType {
         }
     }
 
-    public static void setFontFace(FontType fontType, Button... buttons) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(fontType));
+    public static void setFontFace(Button... buttons) {
+        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
+                FontType.FONT_MEDIUM));
         for(Button button : buttons) {
             button.setTypeface(type);
         }
     }
 
-    public static void setFontFace(FontType fontType, RadioButton... radioButtons) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(fontType));
+    public static void setFontFace(RadioButton... radioButtons) {
+        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
+                FontType.FONT_MEDIUM));
         for(RadioButton radioButton : radioButtons) {
             radioButton.setTypeface(type);
         }

@@ -97,7 +97,6 @@
             android:text="@string/nourallah"/>
 
     </RadioGroup>
-
     </LinearLayout>
 
 </LinearLayout>

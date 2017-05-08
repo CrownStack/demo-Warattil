@@ -10,21 +10,25 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import app.com.warattil.R;
+import app.com.warattil.utils.AppPreference;
+import app.com.warattil.utils.Constants;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements Constants {
 
-    private ImageView mImageViewSplash;
+    @BindView(R.id.image_view_splash) ImageView mImageViewSplash;
+
     private static final long FIRST_SPLASH_TIME = 2000;
     private static final long SECOND_SPLASH_TIME = 1000;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        mImageViewSplash = (ImageView) findViewById(R.id.image_view_splash);
+        ButterKnife.bind(this);
         mImageViewSplash.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -46,12 +50,11 @@ public class SplashActivity extends AppCompatActivity {
         }, SECOND_SPLASH_TIME);
     }
 
-    public void retrievePreference() {
-        SharedPreferences _PREFS = getSharedPreferences(getString(R.string.LANGUAGE_PREFERENCES), MODE_PRIVATE);
-        String storedLanguage = _PREFS.getString(getString(R.string.language), null);
-        String storedReciter = _PREFS.getString(getString(R.string.reciter), null);
+    private void retrievePreference() {
+        String storedLanguage = AppPreference.getAppPreference(SplashActivity.this).getString(PREF_LANGUAGE);
+        String storedReciter  = AppPreference.getAppPreference(SplashActivity.this).getString(PREF_RECITER);
 
-        if(storedLanguage != null || storedReciter != null) {
+        if(storedLanguage.equals(PREF_LANGUAGE_ENGLISH) || storedLanguage.equals(PREF_LANGUAGE_ARABIC) ) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         } else {
