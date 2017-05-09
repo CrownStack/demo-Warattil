@@ -37,14 +37,15 @@ public enum FontType {
 
     public static void setFontFace(TextView... textViews) {
         Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
-                FontType.FONT_MEDIUM));
+                FontType.FONT_REGULAR));
         for(TextView textView : textViews) {
             textView.setTypeface(type);
         }
     }
 
-    public static void setFontFace(FontType fontType, EditText... editTexts) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(fontType));
+    public static void setFontFace(EditText... editTexts) {
+        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
+                FontType.FONT_MEDIUM));
         for(EditText editText : editTexts) {
             editText.setTypeface(type);
         }
@@ -52,7 +53,7 @@ public enum FontType {
 
     public static void setFontFace(Button... buttons) {
         Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
-                FontType.FONT_MEDIUM));
+                FontType.FONT_REGULAR));
         for(Button button : buttons) {
             button.setTypeface(type);
         }
@@ -60,7 +61,7 @@ public enum FontType {
 
     public static void setFontFace(RadioButton... radioButtons) {
         Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
-                FontType.FONT_MEDIUM));
+                FontType.FONT_REGULAR));
         for(RadioButton radioButton : radioButtons) {
             radioButton.setTypeface(type);
         }

@@ -3,28 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
+        android:background="@drawable/ic_background"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
     tools:context="app.com.warattil.activities.MainActivity">
 
-    <EditText
-            android:id="@+id/edit_text_search"
+    <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/search"
-            android:maxLines="1"
-            android:paddingLeft="10dp"
+            android:layout_height="@dimen/linear_layout_height"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:weightSum="1">
+        <EditText
+                android:id="@+id/edit_text_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="@string/search"
+                android:maxLines="1"
+                android:layout_weight=".9"
+                android:backgroundTint="@color/colorGold"
+                android:textSize="@dimen/text_header_size"
+                android:paddingLeft="@dimen/edit_text_padding_left"
+                android:textColor="@color/colorGold"
+                android:textColorHint="@color/colorGold"/>
 
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite"
-            android:layout_alignParentTop="true"/>
+        <ImageView
+                android:id="@+id/image_view_setting"
+                android:layout_width="@dimen/image_view_width"
+                android:layout_height="@dimen/image_view_height"
+                android:src="@drawable/ic_setting"
+                android:layout_gravity="center"
+                android:layout_weight=".1"/>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view_surah"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_text_search">
+        android:layout_below="@+id/linear_layout"
+        android:layout_alignParentBottom="true">
 
     </android.support.v7.widget.RecyclerView>
 

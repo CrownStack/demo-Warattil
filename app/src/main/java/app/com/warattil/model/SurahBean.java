@@ -9,10 +9,10 @@ public class SurahBean {
     private String titleEnglish;
     private String titleArabic;
 
-    public SurahBean(String f_name, int id, String f_name2, String titleEnglish, String titleArabic) {
+    public SurahBean(String f_name2, int id, String f_name, String titleEnglish, String titleArabic) {
         this.id = id;
-        this.f_name = f_name;
         this.f_name2 = f_name2;
+        this.f_name = f_name;
         this.titleEnglish = titleEnglish;
         this.titleArabic = titleArabic;
     }

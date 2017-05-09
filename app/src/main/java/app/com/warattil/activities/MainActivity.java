@@ -1,6 +1,7 @@
 package app.com.warattil.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -11,7 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 import app.com.warattil.R;
@@ -25,11 +29,13 @@ import app.com.warattil.utils.GetDetailAsync;
 import app.com.warattil.utils.IResponseListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
     @BindView(R.id.recycle_view_surah) RecyclerView recyclerViewSurah;
     @BindView(R.id.edit_text_search) EditText editTextSearch;
+    @BindView(R.id.image_view_setting) ImageView imageViewSetting;
     private final List<SurahBean> mBeanList = new ArrayList<>();
     private String mLanguageType;
     private SurahAdapter mAdapter;
@@ -52,6 +58,12 @@ public class MainActivity extends AppCompatActivity implements Constants {
         } else {
             initView();
         }
+    }
+
+    @OnClick(R.id.image_view_setting)
+    void clickSetting(View view) {
+        startActivity(new Intent(this, SettingActivity.class));
+        finish();
     }
 
     private void fetchData() {
@@ -100,20 +112,22 @@ public class MainActivity extends AppCompatActivity implements Constants {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
+            public void afterTextChanged(Editable filterString) {
+                filter(filterString.toString());
             }
         });
     }
 
-    private void filter(String text) {
-        List<SurahBean> temp = new ArrayList<>();
+    private void filter(String filterString) {
+        List<SurahBean> filterList = new ArrayList<>();
         for(SurahBean bean : mBeanList) {
-            if(bean.getTitleEnglish().contains(text)) {
-                temp.add(bean);
+            if(bean.getTitleEnglish().contains(filterString)
+                    || bean.getTitleArabic().contains(filterString)
+                    || String.valueOf(bean.getId()).contains(filterString)) {
+                filterList.add(bean);
             }
         }
-        mAdapter.updateList(temp);
+        mAdapter.updateList(filterList);
     }
 
     private void retrievePreference() {
