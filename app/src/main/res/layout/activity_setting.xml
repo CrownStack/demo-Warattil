@@ -72,7 +72,7 @@
             android:id="@+id/radio_button_arabic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:buttonTint="@color/colorWhite"
+            android:buttonTint="@color/colorWhite"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_normal_size"
             android:text="@string/arabic"/>
@@ -98,14 +98,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-                android:buttonTint="@color/colorWhite"
+            android:buttonTint="@color/colorWhite"
             android:textSize="@dimen/text_normal_size"
             android:text="@string/sheikh"/>
         <RadioButton
             android:id="@+id/radio_button_nourallah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                android:buttonTint="@color/colorWhite"
+            android:buttonTint="@color/colorWhite"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_normal_size"
             android:text="@string/nourallah"/>

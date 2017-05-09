@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, Constants{
+public class SettingActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, Constants {
 
     @BindView(R.id.image_view_back) ImageView imageViewBack;
     @BindView(R.id.image_view_next) ImageView imageViewNext;

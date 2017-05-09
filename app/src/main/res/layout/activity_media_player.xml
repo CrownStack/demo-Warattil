@@ -51,7 +51,6 @@
                 android:layout_height="@dimen/image_view_media_player_height"
                 android:contentDescription="null"
                 android:src="@drawable/ic_launcher_app"/>
-
         <ProgressBar
                 android:id="@+id/progress_bar"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -84,7 +83,6 @@
                 android:textSize="@dimen/text_header_size"
                 android:gravity="center"
                 android:textColor="@color/colorWhite"/>
-
         <TextView
                 android:id="@+id/text_view_song"
                 android:layout_width="wrap_content"
@@ -102,31 +100,35 @@
             <ImageView
                     android:id="@+id/image_view_shuffle"
                     android:layout_width="@dimen/image_view_width"
-                    android:layout_height="@dimen/image_view_height"                    android:layout_alignParentLeft="true"
+                    android:layout_height="@dimen/image_view_height"
+                    android:layout_alignParentLeft="true"
                     android:src="@drawable/ic_shuffle"/>
             <ImageView
                     android:id="@+id/image_view_reverse"
                     android:layout_width="@dimen/image_view_width"
-                    android:layout_height="@dimen/image_view_height"                    android:layout_marginLeft="30dp"
+                    android:layout_height="@dimen/image_view_height"
+                    android:layout_marginLeft="30dp"
                     android:layout_toRightOf="@+id/image_view_shuffle"
                     android:src="@drawable/ic_reverse"/>
             <ImageView
                     android:id="@+id/image_view_play"
                     android:layout_width="@dimen/image_view_width"
-                    android:layout_height="@dimen/image_view_height"                    android:layout_centerHorizontal="true"
+                    android:layout_height="@dimen/image_view_height"
+                    android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_play"/>
             <ImageView
                     android:id="@+id/image_view_forward"
                     android:layout_width="@dimen/image_view_width"
-                    android:layout_height="@dimen/image_view_height"                    android:layout_toLeftOf="@+id/image_view_repeat"
+                    android:layout_height="@dimen/image_view_height"
+                    android:layout_toLeftOf="@+id/image_view_repeat"
                     android:layout_marginRight="@dimen/image_view_media_player_margin"
                     android:src="@drawable/ic_forward"/>
             <ImageView
                     android:id="@+id/image_view_repeat"
                     android:layout_width="@dimen/image_view_width"
-                    android:layout_height="@dimen/image_view_height"                    android:layout_alignParentRight="true"
+                    android:layout_height="@dimen/image_view_height"
+                    android:layout_alignParentRight="true"
                     android:src="@drawable/ic_repeat"/>
-
         </RelativeLayout>
 
     </LinearLayout>

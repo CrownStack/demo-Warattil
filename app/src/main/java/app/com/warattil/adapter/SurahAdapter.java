@@ -1,8 +1,6 @@
 package app.com.warattil.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,30 +14,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.com.warattil.R;
-import app.com.warattil.activities.MediaPlayerActivity;
 import app.com.warattil.font.FontHelper;
-import app.com.warattil.helper.Message;
-import app.com.warattil.model.SurahBean;
+import app.com.warattil.model.Surah;
 import app.com.warattil.utils.DownloadingTask;
 
 public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> {
 
-    private List<SurahBean> mSurahBeans = new ArrayList<>();
+    private List<Surah> mSurahs = new ArrayList<>();
 
     private final String mLanguageType;
     private final Context mContext;
 
-
-
-    public SurahAdapter(Context context, String languageType, List<SurahBean> beanList) {
+    public SurahAdapter(Context context, String languageType, List<Surah> surahs) {
         this.mContext = context;
         this.mLanguageType = languageType;
-        this.mSurahBeans = beanList;
+        this.mSurahs = surahs;
     }
 
     @Override
     public int getItemCount() {
-        return mSurahBeans.size();
+        return mSurahs.size();
     }
 
     @Override
@@ -51,23 +45,22 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         String language ;
-        final SurahBean mSurahBean = mSurahBeans.get(position);
-        String id = String.valueOf(mSurahBean.getId());
+        final Surah surah = mSurahs.get(position);
+        String id = String.valueOf(surah.getId());
         if(mLanguageType.equals("PREF_LANGUAGE_ARABIC")) {
-            language = mSurahBean.getTitleArabic();
+            language = surah.getTitleArabic();
             holder.mTextViewLanguage.setGravity(Gravity.RIGHT);
             holder.mTextViewLanguage.setText(id + " - " +language);
         } else {
             holder.mTextViewLanguage.setGravity(Gravity.START);
-            language = mSurahBean.getTitleEnglish();
+            language = surah.getTitleEnglish();
             holder.mTextViewLanguage.setText(id + " - " + language);
         }
         holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                    mContext.startActivity(new Intent(mContext, MediaPlayerActivity.class));
-                DownloadingTask.getInstance(mContext).startDownload(mSurahBean.getF_name());
-                Log.e("getF_name:", mSurahBean.getF_name2());
+                DownloadingTask.getInstance(mContext).startDownload(surah.getF_name());
+                Log.e("getF_name:", surah.getF_name2());
             }
         });
     }
@@ -85,8 +78,8 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
 
     }
 
-    public void updateList(List<SurahBean> list) {
-        mSurahBeans = list;
+    public void updateList(List<Surah> list) {
+        mSurahs = list;
         notifyDataSetChanged();
     }
 }
