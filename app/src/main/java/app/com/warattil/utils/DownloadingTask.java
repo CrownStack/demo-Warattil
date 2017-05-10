@@ -1,6 +1,5 @@
 package app.com.warattil.utils;
 
-
 import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
@@ -15,7 +14,6 @@ public class DownloadingTask implements Constants {
     private DownloadManager mDownloadManager = null;
     private static DownloadingTask sDownloadingTask;
 
-
     private DownloadingTask(Context mContext){
         File mDownloadFilePath = new File(Environment.getExternalStorageDirectory() + DOWNLOAD_BASE_PATH);
         if (!mDownloadFilePath.exists()) mDownloadFilePath.mkdirs();
@@ -28,10 +26,17 @@ public class DownloadingTask implements Constants {
         return sDownloadingTask;
     }
 
-    public void startDownload(String url) {
+    public void startSheikhDownload(String url) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(BuildConfig.HOST_URL + url))
                 .setTitle(url)
-                .setDestinationInExternalPublicDir(PRAYER_DIR_PATH, url + FILE_EXTENSION);
+                .setDestinationInExternalPublicDir(PRAYER_DIR_PATH, url);
+        mDownloadManager.enqueue(request);
+    }
+
+    public void startNOURALLAHDownload(String url) {
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(BuildConfig.HOST_URL_TWO + url))
+                .setTitle(url)
+                .setDestinationInExternalPublicDir(PRAYER_TWO_DIR_PATH, url);
         mDownloadManager.enqueue(request);
     }
 }

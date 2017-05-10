@@ -21,6 +21,7 @@ android {
     productFlavors {
         developer {
            buildConfigField 'String', 'HOST_URL', '"http://www.outdoorbranding.com/for_clients/Quran_App/Surah/"'
+            buildConfigField 'String', 'HOST_URL_TWO', '"http://www.outdoorbranding.com/for_clients/Quran_App/Surah2/"'
         }
     }
 }
