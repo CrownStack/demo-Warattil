@@ -1,12 +1,7 @@
 package app.com.warattil.utils;
 
-
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 
@@ -32,7 +27,6 @@ public class DownloadingTask implements Constants {
     }
 
     public void startSheikhDownload(String url) {
-
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(BuildConfig.HOST_URL + url))
                 .setTitle(url)
                 .setDestinationInExternalPublicDir(PRAYER_DIR_PATH, url);

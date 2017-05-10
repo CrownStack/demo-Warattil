@@ -4,15 +4,15 @@ package app.com.warattil.model;
 public class Surah {
 
     private int id;
-    private String FirstReciter;
-    private String SecondReciter;
+    private String firstReciter;
+    private String secondReciter;
     private String titleEnglish;
     private String titleArabic;
 
-    public Surah(String f_name2, int id, String f_name, String titleEnglish, String titleArabic) {
+    public Surah(String secondReciter, int id, String firstReciter, String titleEnglish, String titleArabic) {
         this.id = id;
-        this.SecondReciter = f_name2;
-        this.FirstReciter = f_name;
+        this.secondReciter = secondReciter;
+        this.firstReciter = firstReciter;
         this.titleEnglish = titleEnglish;
         this.titleArabic = titleArabic;
     }
@@ -26,19 +26,19 @@ public class Surah {
     }
 
     public String getSecondReciter() {
-        return SecondReciter;
+        return secondReciter;
     }
 
     public void setSecondReciter(String secondReciter) {
-        this.SecondReciter = secondReciter;
+        this.secondReciter = secondReciter;
     }
 
     public String getFirstReciter() {
-        return FirstReciter;
+        return firstReciter;
     }
 
     public void setFirstReciter(String firstReciter) {
-        this.FirstReciter = firstReciter;
+        this.firstReciter = firstReciter;
     }
 
     public String getTitleEnglish() {
