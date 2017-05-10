@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import app.com.warattil.R;
@@ -23,7 +24,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     @BindView(R.id.image_view_play) ImageView imageViewPlay;
     @BindView(R.id.image_view_forward) ImageView imageViewForward;
     @BindView(R.id.image_view_repeat) ImageView imageViewRepeat;
-    @BindView(R.id.progress_bar) ProgressBar progressBar;
+    @BindView(R.id.seek_bar) SeekBar seekBar;
     @BindView(R.id.text_view_time) TextView textViewTime;
     @BindView(R.id.text_view_title) TextView textViewTitle;
     @BindView(R.id.text_view_song) TextView textViewSong;
@@ -45,5 +46,4 @@ public class MediaPlayerActivity extends AppCompatActivity {
     void clickSetting(View view) {
         startActivity(new Intent(this, SettingActivity.class));
     }
-
 }

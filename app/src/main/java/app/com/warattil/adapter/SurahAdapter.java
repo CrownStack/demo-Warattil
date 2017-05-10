@@ -62,9 +62,9 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 if(mReciterType.equals("PREF_RECITER_SHEIKH")) {
-                    DownloadingTask.getInstance(mContext).startSheikhDownload(surah.getFirstReciter());
+                    DownloadingTask.getInstance(mContext).startFirstDownload(surah.getFirstReciter());
                 } else if(mReciterType.equals("PREF_RECITER_NOURALLAH")) {
-                    DownloadingTask.getInstance(mContext).startNOURALLAHDownload(surah.getSecondReciter());
+                    DownloadingTask.getInstance(mContext).startSecondDownload(surah.getSecondReciter());
                 }
             }
         });
@@ -82,7 +82,6 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
             mLinearLayout = (LinearLayout) view.findViewById(R.id.ll_item);
             FontHelper.setFontFace(mTextViewLanguage);
         }
-
     }
 
     public void updateList(List<Surah> list) {

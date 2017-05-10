@@ -17,7 +17,6 @@ public class DownloadingTask implements Constants {
     private DownloadingTask(Context mContext){
         File mDownloadFilePath = new File(Environment.getExternalStorageDirectory() + DOWNLOAD_BASE_PATH);
         if (!mDownloadFilePath.exists()) mDownloadFilePath.mkdirs();
-
         mDownloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
     }
 
@@ -26,14 +25,14 @@ public class DownloadingTask implements Constants {
         return sDownloadingTask;
     }
 
-    public void startSheikhDownload(String url) {
+    public void startFirstDownload(String url) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(BuildConfig.HOST_URL + url))
                 .setTitle(url)
                 .setDestinationInExternalPublicDir(PRAYER_DIR_PATH, url);
         mDownloadManager.enqueue(request);
     }
 
-    public void startNOURALLAHDownload(String url) {
+    public void startSecondDownload(String url) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(BuildConfig.HOST_URL_TWO + url))
                 .setTitle(url)
                 .setDestinationInExternalPublicDir(PRAYER_TWO_DIR_PATH, url);

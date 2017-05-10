@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:adroid="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/linear_layout_list_item_height"
+        android:layout_height="@dimen/_50sdp"
         android:orientation="horizontal"
         android:weightSum="1"
         android:id="@+id/ll_item">
 
     <TextView
             android:id="@+id/text_view_item_language"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text=""
             android:textSize="@dimen/text_normal_size"
             android:layout_weight=".9"
             android:textColor="@color/colorWhite"/>
-
     <ImageView
             android:id="@+id/image_view_downlaod"
-            android:layout_width="@dimen/image_view_width"
-            android:layout_height="@dimen/image_view_height"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_gravity="center"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/_5sdp"
             android:layout_weight=".1"
             android:src="@drawable/ic_download"/>
 

@@ -11,7 +11,7 @@
     <LinearLayout
             android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/linear_layout_height"
+            android:layout_height="@dimen/_60sdp"
             android:orientation="horizontal"
             android:layout_alignParentTop="true"
             android:weightSum="1">
@@ -22,20 +22,18 @@
                 android:hint="@string/search"
                 android:maxLines="1"
                 android:layout_weight=".9"
-                android:backgroundTint="@color/colorGold"
+                android:backgroundTint="@color/colorCoralTree"
                 android:textSize="@dimen/text_header_size"
-                android:paddingLeft="@dimen/edit_text_padding_left"
-                android:textColor="@color/colorGold"
-                android:textColorHint="@color/colorGold"/>
-
+                android:paddingLeft="@dimen/_10sdp"
+                android:textColor="@color/colorCoralTree"
+                android:textColorHint="@color/colorCoralTree"/>
         <ImageView
                 android:id="@+id/image_view_setting"
-                android:layout_width="@dimen/image_view_width"
-                android:layout_height="@dimen/image_view_height"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
                 android:src="@drawable/ic_setting"
                 android:layout_gravity="center"
                 android:layout_weight=".1"/>
-
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @BindView(R.id.recycle_view_surah) RecyclerView recyclerViewSurah;
     @BindView(R.id.edit_text_search) EditText editTextSearch;
     @BindView(R.id.image_view_setting) ImageView imageViewSetting;
+
     private final List<Surah> surahs = new ArrayList<>();
     private String mLanguageType;
     private SurahAdapter mAdapter;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         ButterKnife.bind(this);
         fetchData();
         retrievePreference();
+
         PermissionClass permission = new PermissionClass(this);
         if(!permission.checkPermission(permissions)) {
             permission.requestPermission(REQUEST_PERMISSION_CODE, permissions);
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         switch (requestCode) {
             case REQUEST_PERMISSION_CODE : {
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
