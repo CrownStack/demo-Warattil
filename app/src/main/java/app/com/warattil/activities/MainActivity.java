@@ -1,6 +1,8 @@
 package app.com.warattil.activities;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerViewSurah.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewSurah.setLayoutManager(mLayoutManager);
-        mAdapter = new SurahAdapter(MainActivity.this, mLanguageType, surahs);
+        mAdapter = new SurahAdapter(MainActivity.this, mLanguageType, mReciterType, surahs);
         recyclerViewSurah.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         searchFilter();

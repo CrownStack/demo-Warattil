@@ -5,7 +5,7 @@ public interface Constants {
 
     String DOWNLOAD_BASE_PATH      = "/warattil";
     String PRAYER_DIR_PATH         = "/warattil/prayer";
-    String FILE_EXTENSION          = ".mp3";
+    String PRAYER_TWO_DIR_PATH     = "/warattil/prayerTwo";
 
     String PREF_LANGUAGE           = "PREF_LANGUAGE";
     String PREF_LANGUAGE_ENGLISH   = "PREF_LANGUAGE_ENGLISH";
@@ -13,5 +13,4 @@ public interface Constants {
     String PREF_RECITER            = "PREF_RECITER";
     String PREF_RECITER_SHEIKH     = "PREF_RECITER_SHEIKH";
     String PREF_RECITER_NOURALLAH  = "PREF_RECITER_NOURALLAH";
-
 }
