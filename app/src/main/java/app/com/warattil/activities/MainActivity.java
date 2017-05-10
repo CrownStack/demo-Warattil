@@ -1,7 +1,7 @@
 package app.com.warattil.activities;
 
 import android.Manifest;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +10,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 import app.com.warattil.R;
 import app.com.warattil.adapter.SurahAdapter;
 import app.com.warattil.font.FontHelper;
-import app.com.warattil.model.SurahBean;
+import app.com.warattil.model.Surah;
 import app.com.warattil.permission.PermissionClass;
 import app.com.warattil.utils.AppPreference;
 import app.com.warattil.utils.Constants;
@@ -25,12 +27,14 @@ import app.com.warattil.utils.GetDetailAsync;
 import app.com.warattil.utils.IResponseListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
     @BindView(R.id.recycle_view_surah) RecyclerView recyclerViewSurah;
     @BindView(R.id.edit_text_search) EditText editTextSearch;
-    private final List<SurahBean> mBeanList = new ArrayList<>();
+    @BindView(R.id.image_view_setting) ImageView imageViewSetting;
+    private final List<Surah> surahs = new ArrayList<>();
     private String mLanguageType;
     private SurahAdapter mAdapter;
     private String mReciterType;
@@ -54,11 +58,17 @@ public class MainActivity extends AppCompatActivity implements Constants {
         }
     }
 
+    @OnClick(R.id.image_view_setting)
+    void clickSetting(View view) {
+        startActivity(new Intent(this, SettingActivity.class));
+        finish();
+    }
+
     private void fetchData() {
         GetDetailAsync detailAsync = new GetDetailAsync(MainActivity.this, new IResponseListener() {
             @Override
-            public void success(List<SurahBean> success) {
-                mBeanList.addAll(success);
+            public void success(List<Surah> success) {
+                surahs.addAll(success);
             }
         });
         detailAsync.execute();
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerViewSurah.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewSurah.setLayoutManager(mLayoutManager);
-        mAdapter = new SurahAdapter(MainActivity.this, mLanguageType, mBeanList);
+        mAdapter = new SurahAdapter(MainActivity.this, mLanguageType, surahs);
         recyclerViewSurah.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         searchFilter();
@@ -100,25 +110,26 @@ public class MainActivity extends AppCompatActivity implements Constants {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
+            public void afterTextChanged(Editable filterString) {
+                filter(filterString.toString());
             }
         });
     }
 
-    private void filter(String text) {
-        List<SurahBean> temp = new ArrayList<>();
-        for(SurahBean bean : mBeanList) {
-            if(bean.getTitleEnglish().contains(text)) {
-                temp.add(bean);
+    private void filter(String filterString) {
+        List<Surah> filters = new ArrayList<>();
+        for(Surah surah : surahs) {
+            if(surah.getTitleEnglish().contains(filterString)
+                    || surah.getTitleArabic().contains(filterString)
+                    || String.valueOf(surah.getId()).contains(filterString)) {
+                filters.add(surah);
             }
         }
-        mAdapter.updateList(temp);
+        mAdapter.updateList(filters);
     }
 
     private void retrievePreference() {
         mLanguageType = AppPreference.getAppPreference(MainActivity.this).getString(PREF_LANGUAGE);
         mReciterType = AppPreference.getAppPreference(MainActivity.this).getString(PREF_RECITER);
-        Log.e("ml", mLanguageType + " " + mReciterType );
     }
 }

@@ -2,52 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/ic_background"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="@dimen/relative_layout_setting_margin"
+        android:layout_marginLeft="@dimen/relative_layout_setting_margin"
+            android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/image_view_back"
+            android:layout_width="@dimen/image_view_width"
+            android:layout_height="@dimen/image_view_height"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:text="Back"/>
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_arrow"/>
+
         <TextView
             android:id="@+id/text_view_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/button_back"
             android:layout_centerInParent="true"
+            android:textSize="@dimen/text_header_size"
             android:textColor="@color/colorCoralTree"
             android:text="@string/settings"/>
 
-        <Button
-            android:id="@+id/button_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/image_view_next"
+            android:layout_width="@dimen/image_view_width"
+            android:layout_height="@dimen/image_view_height"
             android:layout_alignParentRight="true"
-            android:text="Next"/>
+            android:src="@drawable/ic_arrow_next"/>
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="@dimen/linear_layout_setting_margin_left"
         android:orientation="vertical">
 
     <TextView
         android:id="@+id/text_view_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/text_view_setting_margin_top"
         android:textColor="@color/colorCoralTree"
+        android:textSize="@dimen/text_header_size"
         android:text="@string/language"/>
 
     <RadioGroup
@@ -60,12 +65,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
+            android:buttonTint="@color/colorWhite"
+            android:textSize="@dimen/text_normal_size"
             android:text="@string/english"/>
         <RadioButton
             android:id="@+id/radio_button_arabic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/colorWhite"
             android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_normal_size"
             android:text="@string/arabic"/>
 
     </RadioGroup>
@@ -74,8 +83,9 @@
         android:id="@+id/text_view_reciter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/text_view_setting_margin_top"
         android:textColor="@color/colorCoralTree"
+        android:textSize="@dimen/text_header_size"
         android:text="@string/reciter"/>
 
     <RadioGroup
@@ -88,12 +98,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
+            android:buttonTint="@color/colorWhite"
+            android:textSize="@dimen/text_normal_size"
             android:text="@string/sheikh"/>
         <RadioButton
             android:id="@+id/radio_button_nourallah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/colorWhite"
             android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_normal_size"
             android:text="@string/nourallah"/>
 
     </RadioGroup>

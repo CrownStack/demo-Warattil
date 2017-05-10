@@ -14,7 +14,7 @@ import java.util.List;
 import app.com.warattil.R;
 import app.com.warattil.database.DBAdapter;
 import app.com.warattil.helper.ProgressHelper;
-import app.com.warattil.model.SurahBean;
+import app.com.warattil.model.Surah;
 
 public class GetDetailAsync extends AsyncTask<String, Void, String> {
 
@@ -59,7 +59,7 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
                 return;
             }
         }
-        List<SurahBean> mSurahList = mDbAdapter.getSurahList();
+        List<Surah> mSurahList = mDbAdapter.getSurahList();
         mResponseListener.success(mSurahList);
     }
 

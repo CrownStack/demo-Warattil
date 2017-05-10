@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.com.warattil.model.SurahBean;
+import app.com.warattil.model.Surah;
 
 public class DBAdapter extends SQLiteOpenHelper {
 
@@ -48,17 +48,17 @@ public class DBAdapter extends SQLiteOpenHelper {
         }
     }
 
-    public List<SurahBean> getSurahList() {
-        List<SurahBean> surahList = new ArrayList<>();
+    public List<Surah> getSurahList() {
+        List<Surah> surahList = new ArrayList<>();
 
         openDatabase();
 
         Cursor cursor = mDatabase.rawQuery(" SELECT * FROM SURAH ", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            SurahBean surahBean;
-            surahBean = new SurahBean(cursor.getString(0), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
-            surahList.add(surahBean);
+            Surah surah;
+            surah = new Surah(cursor.getString(0), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
+            surahList.add(surah);
             cursor.moveToNext();
         }
         cursor.close();

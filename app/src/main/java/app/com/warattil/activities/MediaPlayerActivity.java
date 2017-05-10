@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,12 +16,13 @@ import butterknife.OnClick;
 
 public class MediaPlayerActivity extends AppCompatActivity {
 
-    @BindView(R.id.button_back) Button buttonBack;
-    @BindView(R.id.button_setting) Button buttonSetting;
-    @BindView(R.id.button_shuffle) Button buttonShuffle;
-    @BindView(R.id.button_previous) Button buttonPrevious;
-    @BindView(R.id.button_play) Button buttonPlay;
-    @BindView(R.id.button_next) Button buttonNext;
+    @BindView(R.id.image_view_back) ImageView imageViewBack;
+    @BindView(R.id.image_view_setting) ImageView imageViewSetting;
+    @BindView(R.id.image_view_shuffle) ImageView imageViewShuffle;
+    @BindView(R.id.image_view_reverse) ImageView imageViewReverse;
+    @BindView(R.id.image_view_play) ImageView imageViewPlay;
+    @BindView(R.id.image_view_forward) ImageView imageViewForward;
+    @BindView(R.id.image_view_repeat) ImageView imageViewRepeat;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
     @BindView(R.id.text_view_time) TextView textViewTime;
     @BindView(R.id.text_view_title) TextView textViewTitle;
@@ -33,16 +34,14 @@ public class MediaPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_media_player);
 
         ButterKnife.bind(this);
-        initView();
+        applyTypeface();
     }
 
-    private void initView() {
-
-        FontHelper.setFontFace(buttonBack, buttonSetting, buttonShuffle, buttonPrevious, buttonPlay, buttonNext);
+    private void applyTypeface() {
         FontHelper.setFontFace(textViewTime, textViewTitle, textViewSong);
     }
 
-    @OnClick(R.id.button_setting)
+    @OnClick(R.id.image_view_setting)
     void clickSetting(View view) {
         startActivity(new Intent(this, SettingActivity.class));
     }
