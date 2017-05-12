@@ -75,7 +75,7 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
             }
             outputStream.flush();
             outputStream.close();
-            Log.v("MainActivity ", "DB copied");
+            Log.v("SongListActivity ", "DB copied");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
