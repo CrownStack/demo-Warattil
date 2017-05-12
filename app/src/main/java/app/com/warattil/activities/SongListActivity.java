@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import app.com.warattil.BuildConfig;
 import app.com.warattil.R;
 import app.com.warattil.adapter.SurahAdapter;
 import app.com.warattil.font.FontHelper;
@@ -25,13 +28,14 @@ import app.com.warattil.model.Surah;
 import app.com.warattil.permission.PermissionClass;
 import app.com.warattil.utils.AppPreference;
 import app.com.warattil.utils.Constants;
+import app.com.warattil.utils.DownloadingTask;
 import app.com.warattil.utils.GetDetailAsync;
 import app.com.warattil.utils.IResponseListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements Constants {
+public class SongListActivity extends AppCompatActivity implements Constants {
 
     @BindView(R.id.recycle_view_surah) RecyclerView recyclerViewSurah;
     @BindView(R.id.edit_text_search) EditText editTextSearch;
@@ -62,6 +66,18 @@ public class MainActivity extends AppCompatActivity implements Constants {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(downloadReceiver, new IntentFilter(DOWNLOADED_ACTION));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(downloadReceiver);
+    }
+
     @OnClick(R.id.image_view_setting)
     void clickSetting(View view) {
         startActivity(new Intent(this, SettingActivity.class));
@@ -69,14 +85,50 @@ public class MainActivity extends AppCompatActivity implements Constants {
     }
 
     private void fetchData() {
-        GetDetailAsync detailAsync = new GetDetailAsync(MainActivity.this, new IResponseListener() {
+        GetDetailAsync detailAsync = new GetDetailAsync(SongListActivity.this, new IResponseListener() {
             @Override
             public void success(List<Surah> success) {
+
                 surahs.addAll(success);
+                for (int i = 0; i < surahs.size(); i++) {
+                    if(mReciterType.equals("PREF_RECITER_SHEIKH")) {
+                        if (DownloadingTask.checkIsDownload(surahs.get(i).getFirstReciter())) surahs.get(i).setDownloaded(true);
+                    } else if(mReciterType.equals("PREF_RECITER_NOURALLAH")) {
+                        if (DownloadingTask.checkIsDownload(surahs.get(i).getSecondReciter())) surahs.get(i).setDownloaded(true);
+                    }
+                }
             }
         });
         detailAsync.execute();
     }
+
+    BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.hasExtra(Constants.DOWNLOAD_ID)) {
+                String downloadedId = intent.getStringExtra(Constants.DOWNLOAD_ID);
+                updateList(downloadedId);
+            }
+        }
+    };
+
+    public void updateList(String downloadedID) {
+
+        for(int i = 0; i < surahs.size(); i++) {
+            String id = null;
+            if(mReciterType.equals("PREF_RECITER_SHEIKH")) {
+                id = surahs.get(i).getFirstReciter();
+            } else if(mReciterType.equals("PREF_RECITER_NOURALLAH")) {
+                id = surahs.get(i).getSecondReciter();
+            }
+            if (id.equals(downloadedID)) {
+                surahs.get(i).setDownloaded(true);
+                break;
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -96,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerViewSurah.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewSurah.setLayoutManager(mLayoutManager);
-        mAdapter = new SurahAdapter(MainActivity.this, mLanguageType, mReciterType, surahs);
+        mAdapter = new SurahAdapter(SongListActivity.this, mLanguageType, mReciterType, surahs);
         recyclerViewSurah.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         searchFilter();
@@ -134,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     }
 
     private void retrievePreference() {
-        mLanguageType = AppPreference.getAppPreference(MainActivity.this).getString(PREF_LANGUAGE);
-        mReciterType = AppPreference.getAppPreference(MainActivity.this).getString(PREF_RECITER);
+        mLanguageType = AppPreference.getAppPreference(SongListActivity.this).getString(PREF_LANGUAGE);
+        mReciterType = AppPreference.getAppPreference(SongListActivity.this).getString(PREF_RECITER);
     }
 }

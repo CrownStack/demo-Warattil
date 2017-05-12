@@ -6,7 +6,7 @@
         android:background="@drawable/ic_background"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-    tools:context="app.com.warattil.activities.MainActivity">
+    tools:context="app.com.warattil.activities.SongListActivity">
 
     <LinearLayout
             android:id="@+id/linear_layout"
@@ -31,6 +31,7 @@
                 android:id="@+id/image_view_setting"
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
+                android:contentDescription="@string/desc"
                 android:src="@drawable/ic_setting"
                 android:layout_gravity="center"
                 android:layout_weight=".1"/>

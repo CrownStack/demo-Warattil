@@ -1,18 +1,11 @@
 package app.com.warattil.activities;
 
-import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -59,7 +52,7 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
     @OnClick(R.id.image_view_next)
     void clickNext() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), SongListActivity.class));
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         finish();
     }

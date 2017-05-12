@@ -9,19 +9,20 @@
     <TextView
             android:id="@+id/text_view_item_language"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textSize="@dimen/text_normal_size"
             android:layout_weight=".9"
+            android:layout_marginRight="@dimen/_10sdp"
             android:textColor="@color/colorWhite"/>
     <ImageView
             android:id="@+id/image_view_downlaod"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:contentDescription="@string/desc"
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_weight=".1"
             android:src="@drawable/ic_download"/>
-
 </LinearLayout>

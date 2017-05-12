@@ -1,7 +1,6 @@
 package app.com.warattil.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -55,7 +54,7 @@ public class SplashActivity extends AppCompatActivity implements Constants {
         String storedReciter  = AppPreference.getAppPreference(SplashActivity.this).getString(PREF_RECITER);
 
         if(storedLanguage.equals(PREF_LANGUAGE_ENGLISH) || storedLanguage.equals(PREF_LANGUAGE_ARABIC) ) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), SongListActivity.class));
             finish();
         } else {
             startActivity(new Intent(getApplicationContext(), SettingActivity.class));
