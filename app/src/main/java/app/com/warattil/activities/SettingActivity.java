@@ -1,13 +1,10 @@
 package app.com.warattil.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -24,14 +21,11 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
     @BindView(R.id.image_view_back) ImageView imageViewBack;
     @BindView(R.id.image_view_next) ImageView imageViewNext;
-
     @BindView(R.id.text_view_settings) TextView textViewSetting;
     @BindView(R.id.text_view_language) TextView textViewLanguage;
     @BindView(R.id.text_view_reciter) TextView textViewReciter;
-
     @BindView(R.id.radio_group_language) RadioGroup radioGroupLanguage;
     @BindView(R.id.radio_group_reciter) RadioGroup radioGroupReciter;
-
     @BindView(R.id.radio_button_english) RadioButton radioButtonEnglish;
     @BindView(R.id.radio_button_arabic) RadioButton radioButtonArabic;
     @BindView(R.id.radio_button_sheikh) RadioButton radioButtonSheikh;
@@ -57,13 +51,14 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
     }
 
     @OnClick(R.id.image_view_next)
-    void clickNext(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    void clickNext() {
+        startActivity(new Intent(getApplicationContext(), SongListActivity.class));
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         finish();
     }
 
     @OnClick(R.id.image_view_back)
-    void clickBack(View view) {
+    void clickBack() {
         startActivity(new Intent(getApplicationContext(), MediaPlayerActivity.class));
         finish();
     }
