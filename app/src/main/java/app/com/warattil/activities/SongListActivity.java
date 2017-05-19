@@ -7,23 +7,24 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
+import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import app.com.warattil.BuildConfig;
 import app.com.warattil.R;
 import app.com.warattil.adapter.SurahAdapter;
 import app.com.warattil.font.FontHelper;
+import app.com.warattil.helper.DatabaseHelper;
 import app.com.warattil.model.Surah;
 import app.com.warattil.permission.PermissionClass;
 import app.com.warattil.utils.AppPreference;
@@ -46,20 +47,20 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     private SurahAdapter mAdapter;
     private String mReciterType;
 
-    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-    final int REQUEST_PERMISSION_CODE = 200;
+   private final String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
+    private final int REQUEST_PERMISSION_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_song_list);
 
         ButterKnife.bind(this);
         fetchData();
         retrievePreference();
 
         PermissionClass permission = new PermissionClass(this);
-        if(!permission.checkPermission(permissions)) {
+        if (!permission.checkPermission(permissions)) {
             permission.requestPermission(REQUEST_PERMISSION_CODE, permissions);
         } else {
             initView();
@@ -69,19 +70,18 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(downloadReceiver, new IntentFilter(DOWNLOADED_ACTION));
+        LocalBroadcastManager.getInstance(this).registerReceiver(downloadReceiver, new IntentFilter(DOWNLOADED_ACTION));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(downloadReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(downloadReceiver);
     }
 
-    @OnClick(R.id.image_view_setting)
-    void clickSetting(View view) {
-        startActivity(new Intent(this, SettingActivity.class));
-        finish();
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     private void fetchData() {
@@ -91,10 +91,15 @@ public class SongListActivity extends AppCompatActivity implements Constants {
 
                 surahs.addAll(success);
                 for (int i = 0; i < surahs.size(); i++) {
-                    if(mReciterType.equals("PREF_RECITER_SHEIKH")) {
-                        if (DownloadingTask.checkIsDownload(surahs.get(i).getFirstReciter())) surahs.get(i).setDownloaded(true);
-                    } else if(mReciterType.equals("PREF_RECITER_NOURALLAH")) {
-                        if (DownloadingTask.checkIsDownload(surahs.get(i).getSecondReciter())) surahs.get(i).setDownloaded(true);
+
+                    if (mReciterType.equals("PREF_RECITER_SHEIKH")) {
+                        if (DownloadingTask.checkIsDownload(surahs.get(i).getFirstReciter())) {
+                            surahs.get(i).setDownloaded(true);
+                        }
+                    } else if (mReciterType.equals("PREF_RECITER_NOURALLAH")) {
+                        if (DownloadingTask.checkIsDownload(surahs.get(i).getSecondReciter())) {
+                            surahs.get(i).setDownloaded(true);
+                        }
                     }
                 }
             }
@@ -102,28 +107,30 @@ public class SongListActivity extends AppCompatActivity implements Constants {
         detailAsync.execute();
     }
 
-    BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.hasExtra(Constants.DOWNLOAD_ID)) {
+            if (intent.hasExtra(Constants.DOWNLOAD_ID)) {
                 String downloadedId = intent.getStringExtra(Constants.DOWNLOAD_ID);
                 updateList(downloadedId);
             }
         }
     };
 
-    public void updateList(String downloadedID) {
+    private void updateList(String downloadedID) {
 
         for(int i = 0; i < surahs.size(); i++) {
             String id = null;
-            if(mReciterType.equals("PREF_RECITER_SHEIKH")) {
+            if (mReciterType.equals("PREF_RECITER_SHEIKH")) {
                 id = surahs.get(i).getFirstReciter();
-            } else if(mReciterType.equals("PREF_RECITER_NOURALLAH")) {
+            } else if (mReciterType.equals("PREF_RECITER_NOURALLAH")) {
                 id = surahs.get(i).getSecondReciter();
             }
-            if (id.equals(downloadedID)) {
-                surahs.get(i).setDownloaded(true);
-                break;
+            if(downloadedID != null && id != null) {
+                if (id.equals(downloadedID)) {
+                    surahs.get(i).setDownloaded(true);
+                    break;
+                }
             }
         }
         mAdapter.notifyDataSetChanged();
@@ -136,7 +143,7 @@ public class SongListActivity extends AppCompatActivity implements Constants {
 
         switch (requestCode) {
             case REQUEST_PERMISSION_CODE : {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                     initView();
                 }
             }
@@ -144,7 +151,7 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     }
 
     private void initView() {
-        FontHelper.setFontFace(editTextSearch);
+        FontHelper.setFontFace(FontHelper.FontType.FONT_MEDIUM, editTextSearch);
         recyclerViewSurah.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewSurah.setLayoutManager(mLayoutManager);
@@ -188,5 +195,18 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     private void retrievePreference() {
         mLanguageType = AppPreference.getAppPreference(SongListActivity.this).getString(PREF_LANGUAGE);
         mReciterType = AppPreference.getAppPreference(SongListActivity.this).getString(PREF_RECITER);
+    }
+
+    @OnClick(R.id.image_view_setting)
+    void clickSetting() {
+        startActivity(new Intent(this, SettingActivity.class));
+        SongListActivity.this.finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) SongListActivity.this.finish();
+
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -28,7 +28,7 @@ public class DownloadingTask implements Constants {
         return sDownloadingTask;
     }
 
-    public void startFirstDownload(String hostUrl, final String url, final int id) {
+    public void startDownload(String hostUrl, final String url, final int id) {
         final long enqueue ;
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(hostUrl + url))
                 .setTitle(url)
@@ -56,13 +56,10 @@ public class DownloadingTask implements Constants {
             }
         };
         context.registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-
     }
 
-    public static boolean checkIsDownload(String filename){
+    public static boolean checkIsDownload(String filename) {
         File file = new File(Environment.getExternalStorageDirectory() + PRAYER_DIR_PATH +"/" + filename);
-        if(file.exists())
-            return true;
-        return false;
-    }
+        return file.exists();
+     }
 }

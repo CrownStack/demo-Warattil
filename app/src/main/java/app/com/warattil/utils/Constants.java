@@ -5,7 +5,7 @@ public interface Constants {
 
     String DOWNLOAD_BASE_PATH      = "/warattil";
     String PRAYER_DIR_PATH         = "/warattil/prayer";
-    String DOWNLOADED_ACTION         = "DOWNLOADED_ACTION";
+    String DOWNLOADED_ACTION       = "DOWNLOADED_ACTION";
     String DOWNLOAD_ID             = "DOWNLOAD_ID";
 
     String PREF_LANGUAGE           = "PREF_LANGUAGE";

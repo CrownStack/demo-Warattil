@@ -34,36 +34,17 @@ public class DBAdapter extends SQLiteOpenHelper {
 
     }
 
-    private void openDatabase() {
-        String dbPath = mContext.getDatabasePath(DB_NAME).getPath();
+    public void openDatabase() {
         if(mDatabase != null && mDatabase.isOpen()) {
             return;
         }
+        String dbPath = mContext.getDatabasePath(DB_NAME).getPath();
         mDatabase = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
-    private void closeDatabase() {
+    public void closeDatabase() {
         if(mDatabase != null) {
             mDatabase.close();
         }
-    }
-
-    public List<Surah> getSurahList() {
-        List<Surah> surahList = new ArrayList<>();
-
-        openDatabase();
-
-        Cursor cursor = mDatabase.rawQuery(" SELECT * FROM SURAH ", null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            Surah surah;
-            surah = new Surah(cursor.getString(0), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
-            surahList.add(surah);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        closeDatabase();
-
-        return surahList;
     }
 }

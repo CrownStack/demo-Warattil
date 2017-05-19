@@ -1,7 +1,9 @@
 package app.com.warattil.model;
 
 
-public class Surah {
+import java.io.Serializable;
+
+public class Surah implements Serializable {
 
     private int id;
     private String firstReciter;
@@ -65,4 +67,5 @@ public class Surah {
     public void setDownloaded(boolean downloaded) {
         isDownloaded = downloaded;
     }
+
 }

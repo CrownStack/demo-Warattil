@@ -17,7 +17,6 @@ public class AppPreference {
 
     public static AppPreference getAppPreference(Context mContext) {
         if (sAppPreference == null) sAppPreference = new AppPreference(mContext);
-
         return sAppPreference;
     }
 
@@ -29,7 +28,4 @@ public class AppPreference {
     public String getString(String key) {
        return sSharedPreferences.getString(key, "");
     }
-
-
-
 }

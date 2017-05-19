@@ -51,7 +51,6 @@ public class SplashActivity extends AppCompatActivity implements Constants {
 
     private void retrievePreference() {
         String storedLanguage = AppPreference.getAppPreference(SplashActivity.this).getString(PREF_LANGUAGE);
-        String storedReciter  = AppPreference.getAppPreference(SplashActivity.this).getString(PREF_RECITER);
 
         if(storedLanguage.equals(PREF_LANGUAGE_ENGLISH) || storedLanguage.equals(PREF_LANGUAGE_ARABIC) ) {
             startActivity(new Intent(getApplicationContext(), SongListActivity.class));

@@ -11,13 +11,12 @@
     <string name="LANGUAGE_PREFERENCES">LanguagePref</string>
     <string name="copy_success">Copy database successfully</string>
     <string name="copy_error">Copy database error</string>
-    <string name="pleaseWait">Please wait...</string>
+    <string name="pleaseWait">Please wait&#8230;</string>
     <string name="nowPlaying">Now Playing</string>
     <string name="surah_title">Surah Al-Fatihah</string>
     <string name="sheikh_maher">Sheikh Maher Ab Muaiqly</string>
     <string name="search">Search</string>
     <string name="desc">No need text for this image</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
