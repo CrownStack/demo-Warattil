@@ -1,13 +1,16 @@
 package app.com.warattil.model;
 
 
-public class Surah {
+import java.io.Serializable;
+
+public class Surah implements Serializable {
 
     private int id;
     private String firstReciter;
     private String secondReciter;
     private String titleEnglish;
     private String titleArabic;
+    private boolean isDownloaded;
 
     public Surah(String secondReciter, int id, String firstReciter, String titleEnglish, String titleArabic) {
         this.id = id;
@@ -56,4 +59,13 @@ public class Surah {
     public void setTitleArabic(String titleArabic) {
         this.titleArabic = titleArabic;
     }
+
+    public boolean isDownloaded() {
+        return isDownloaded;
+    }
+
+    public void setDownloaded(boolean downloaded) {
+        isDownloaded = downloaded;
+    }
+
 }

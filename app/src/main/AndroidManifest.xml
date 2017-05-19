@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
             android:name=".app.MyApplication"
@@ -14,9 +15,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:fullBackupContent="true"
             android:supportsRtl="true"
+            android:largeHeap="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".activities.SplashActivity"
+                android:name="app.com.warattil.activities.SplashActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/NoActionBar">
             <intent-filter>
@@ -25,14 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity"
-                android:theme="@style/NoActionBar"/>
+        <activity
+                android:name=".activities.SongListActivity"
+                android:theme="@style/showNotificationBar"/>
         <activity
                 android:name=".activities.SettingActivity"
-                android:theme="@style/NoActionBar"
-                />
-        <activity android:name=".activities.MediaPlayerActivity"
-                android:theme="@style/NoActionBar"/>
+                android:theme="@style/showNotificationBar"/>
+        <activity
+                android:name=".activities.MediaPlayerActivity"
+                android:theme="@style/showNotificationBar"/>
     </application>
 
 </manifest>

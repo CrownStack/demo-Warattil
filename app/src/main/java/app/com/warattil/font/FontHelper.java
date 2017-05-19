@@ -1,6 +1,7 @@
 package app.com.warattil.font;
 
 import android.graphics.Typeface;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -21,7 +22,7 @@ public enum FontType {
         this.type = type;
     }
 
-    public static String fromType(FontType fontType) {
+    public static String whichFont(FontType fontType) {
 
         if(fontType != null) {
             for(FontType typeEnum : FontType.values()) {
@@ -35,35 +36,26 @@ public enum FontType {
     }
 }
 
-    public static void setFontFace(TextView... textViews) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
-                FontType.FONT_REGULAR));
-        for(TextView textView : textViews) {
-            textView.setTypeface(type);
-        }
-    }
+    public static void setFontFace(FontType fontType, View... views) {
+        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.whichFont(fontType));
 
-    public static void setFontFace(EditText... editTexts) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
-                FontType.FONT_MEDIUM));
-        for(EditText editText : editTexts) {
-            editText.setTypeface(type);
-        }
-    }
-
-    public static void setFontFace(Button... buttons) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
-                FontType.FONT_REGULAR));
-        for(Button button : buttons) {
-            button.setTypeface(type);
-        }
-    }
-
-    public static void setFontFace(RadioButton... radioButtons) {
-        Typeface type = Typeface.createFromAsset(MyApplication.getInstance().getAssets(), FontType.fromType(
-                FontType.FONT_REGULAR));
-        for(RadioButton radioButton : radioButtons) {
-            radioButton.setTypeface(type);
+        for(View view : views) {
+            if(view instanceof TextView) {
+                TextView textView = (TextView) view;
+                textView.setTypeface(type);
+            }
+            if(view instanceof Button) {
+                Button button = (Button) view;
+                button.setTypeface(type);
+            }
+            if(view instanceof EditText) {
+                EditText editText = (EditText) view;
+                editText.setTypeface(type);
+            }
+            if(view instanceof RadioButton) {
+                RadioButton radioButton = (RadioButton) view;
+                radioButton.setTypeface(type);
+            }
         }
     }
 }

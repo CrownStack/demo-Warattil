@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "app.com.warattil"
         minSdkVersion 16
@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -20,7 +21,7 @@ android {
 
     productFlavors {
         developer {
-           buildConfigField 'String', 'HOST_URL', '"http://www.outdoorbranding.com/for_clients/Quran_App/Surah/"'
+            buildConfigField 'String', 'HOST_URL', '"http://www.outdoorbranding.com/for_clients/Quran_App/Surah/"'
             buildConfigField 'String', 'HOST_URL_TWO', '"http://www.outdoorbranding.com/for_clients/Quran_App/Surah2/"'
         }
     }
@@ -37,5 +38,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.intuit.sdp:sdp-android:1.0.4'
+    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
 }

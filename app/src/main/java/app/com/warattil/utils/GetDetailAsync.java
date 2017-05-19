@@ -14,13 +14,13 @@ import java.util.List;
 import app.com.warattil.R;
 import app.com.warattil.database.DBAdapter;
 import app.com.warattil.helper.ProgressHelper;
+import app.com.warattil.helper.DatabaseHelper;
 import app.com.warattil.model.Surah;
 
 public class GetDetailAsync extends AsyncTask<String, Void, String> {
 
     private final IResponseListener mResponseListener;
     private final Context mContext;
-
 
     public GetDetailAsync(Context context, IResponseListener responseListener) {
         this.mContext = context;
@@ -30,6 +30,7 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
         ProgressHelper.start(mContext);
     }
 
@@ -59,7 +60,8 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
                 return;
             }
         }
-        List<Surah> mSurahList = mDbAdapter.getSurahList();
+        DatabaseHelper databaseHelper = new DatabaseHelper(mContext);
+        List<Surah> mSurahList = databaseHelper.getSurahList();
         mResponseListener.success(mSurahList);
     }
 
@@ -75,7 +77,7 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
             }
             outputStream.flush();
             outputStream.close();
-            Log.v("MainActivity ", "DB copied");
+            Log.v("SongListActivity ", "DB copied");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,14 +11,13 @@ public class ProgressHelper {
     private static ProgressDialog sProgressDialog;
 
     public static void start(Context context) {
+        if(null == context ) return;
 
-        if(context != null) {
-            sProgressDialog = new ProgressDialog(context);
-            sProgressDialog.setCancelable(false);
-            sProgressDialog.setMessage(context.getString(R.string.pleaseWait));
-            sProgressDialog.setCanceledOnTouchOutside(false);
-            sProgressDialog.show();
-        }
+        sProgressDialog = new ProgressDialog(context);
+        sProgressDialog.setCancelable(false);
+        sProgressDialog.setMessage(context.getString(R.string.pleaseWait));
+        sProgressDialog.setCanceledOnTouchOutside(false);
+        sProgressDialog.show();
     }
 
     public static void stop() {
