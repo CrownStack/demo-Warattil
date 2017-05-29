@@ -20,12 +20,13 @@ import app.com.warattil.R;
 import app.com.warattil.activities.MediaPlayerActivity;
 import app.com.warattil.font.FontHelper;
 import app.com.warattil.model.Surah;
+import app.com.warattil.utils.Constants;
 import app.com.warattil.utils.DownloadingTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> {
+public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> implements Constants {
 
     private List<Surah> mSurahs = new ArrayList<>();
     private final String mLanguageType;
@@ -73,7 +74,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
             this.position = position;
             String id = String.valueOf(surah.getId());
 
-            boolean isArabic = mLanguageType.equals("PREF_LANGUAGE_ARABIC");
+            boolean isArabic = mLanguageType.equals(PREF_LANGUAGE_ARABIC);
             mTextViewLanguage.setGravity(isArabic ? Gravity.RIGHT : Gravity.START);
             mTextViewLanguage.setText(id + " - " + (isArabic ? surah.getTitleArabic() : surah.getTitleEnglish()));
 
@@ -85,7 +86,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
         @OnClick(R.id.ll_item) void clickItem() {
             Surah surah = mSurahs.get(position);
 
-            boolean isSheikh = mReciterType.equals("PREF_RECITER_SHEIKH");
+            boolean isSheikh = mReciterType.equals(PREF_RECITER_SHEIKH);
             String prayerUrl = (isSheikh ? surah.getFirstReciter() : surah.getSecondReciter());
             String hostUrl = (isSheikh ? BuildConfig.HOST_URL : BuildConfig.HOST_URL_TWO);
 
@@ -93,7 +94,7 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
                 DownloadingTask.getInstance(mContext).startDownload(hostUrl, prayerUrl, surah.getId());
             } else {
                 String mLanguage;
-                boolean isArabic = mLanguageType.equals("PREF_LANGUAGE_ARABIC");
+                boolean isArabic = mLanguageType.equals(PREF_LANGUAGE_ARABIC);
                     mLanguage = (isArabic ? surah.getTitleArabic() : surah.getTitleEnglish());
 
                 Intent mediaIntent = new Intent(mContext, MediaPlayerActivity.class);

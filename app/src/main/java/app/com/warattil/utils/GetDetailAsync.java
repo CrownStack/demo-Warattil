@@ -53,9 +53,9 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
         if(!database.exists()) {
             mDbAdapter.getReadableDatabase();
             if(copyDatabase()) {
-                Log.e("success", mContext.getString(R.string.copy_success));
+                Log.d("success", mContext.getString(R.string.copy_success));
             } else {
-                Log.e("error", mContext.getString(R.string.copy_error));
+                Log.d("error", mContext.getString(R.string.copy_error));
 
                 return;
             }
@@ -77,7 +77,7 @@ public class GetDetailAsync extends AsyncTask<String, Void, String> {
             }
             outputStream.flush();
             outputStream.close();
-            Log.v("SongListActivity ", "DB copied");
+            Log.d("SongListActivity ", "DB copied");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
