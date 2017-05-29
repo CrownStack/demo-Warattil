@@ -35,11 +35,10 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
     @BindView(R.id.text_view_title) TextView textViewTitle;
     @BindView(R.id.text_view_song) TextView textViewSong;
 
-
     private String mReciter;
     private String mFileName;
     private String mUrl;
-    private Player player;
+    private Player mPlayer;
     private String mLanguageType;
 
     private ArrayList<Surah> mSurahs;
@@ -73,13 +72,13 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
             textViewSong.setText(mMusicTitle);
             if(mReciter.equals(PREF_RECITER_NOURALLAH)) textViewTitle.setText(getString(R.string.nourallah));
             else textViewTitle.setText(getString(R.string.sheikh));
-            player = new Player(this, mUrl, seekBar, textViewTime, imageViewPlayPause);
+            mPlayer = new Player(this, mUrl, seekBar, textViewTime, imageViewPlayPause);
         }
     }
 
     @OnClick(R.id.image_view_play_pause)
     void playMusic() {
-        player.togglePlay();
+        mPlayer.togglePlay();
     }
 
     @OnClick(R.id.image_view_forward)
@@ -114,7 +113,7 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
 
     @OnClick(R.id.image_view_repeat)
     void playRepeat() {
-        player.repeat();
+        mPlayer.repeat();
     }
 
     private void getDownloadedList() {
@@ -145,7 +144,7 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
     @Override
     protected void onStop() {
         super.onStop();
-        player.stop();
+        mPlayer.stop();
     }
 
     private void applyTypeface() {
@@ -162,8 +161,8 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
         mFileName = mSongList.get(index);
         File file = new File(Environment.getExternalStorageDirectory() + PRAYER_DIR_PATH + "/" + mFileName);
         mUrl = file.getAbsolutePath();
-        player.stop();
-        player = new Player(this, mUrl, seekBar, textViewTime, imageViewPlayPause);
+        mPlayer.stop();
+        mPlayer = new Player(this, mUrl, seekBar, textViewTime, imageViewPlayPause);
         songTitleForPreviousForward(index);
     }
 

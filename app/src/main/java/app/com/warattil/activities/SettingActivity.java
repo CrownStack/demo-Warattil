@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -64,8 +63,8 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
                 startActivity(new Intent(getApplicationContext(), SongListActivity.class));
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 SettingActivity.this.finish();
-            } else Message.message(getApplicationContext(), "Please select a reciter");
-        } else Message.message(getApplicationContext(), "Please select a language and a reciter");
+            } else Message.message(getApplicationContext(), getString(R.string.select_reciter));
+        } else Message.message(getApplicationContext(), getString(R.string.select_language_reciter));
     }
 
     @Override

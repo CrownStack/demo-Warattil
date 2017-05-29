@@ -24,7 +24,6 @@ import java.util.List;
 import app.com.warattil.R;
 import app.com.warattil.adapter.SurahAdapter;
 import app.com.warattil.font.FontHelper;
-import app.com.warattil.helper.DatabaseHelper;
 import app.com.warattil.model.Surah;
 import app.com.warattil.permission.PermissionClass;
 import app.com.warattil.utils.AppPreference;
@@ -92,11 +91,11 @@ public class SongListActivity extends AppCompatActivity implements Constants {
                 surahs.addAll(success);
                 for (int i = 0; i < surahs.size(); i++) {
 
-                    if (mReciterType.equals("PREF_RECITER_SHEIKH")) {
+                    if (mReciterType.equals(PREF_RECITER_SHEIKH)) {
                         if (DownloadingTask.checkIsDownload(surahs.get(i).getFirstReciter())) {
                             surahs.get(i).setDownloaded(true);
                         }
-                    } else if (mReciterType.equals("PREF_RECITER_NOURALLAH")) {
+                    } else if (mReciterType.equals(PREF_RECITER_NOURALLAH)) {
                         if (DownloadingTask.checkIsDownload(surahs.get(i).getSecondReciter())) {
                             surahs.get(i).setDownloaded(true);
                         }
@@ -119,14 +118,14 @@ public class SongListActivity extends AppCompatActivity implements Constants {
 
     private void updateList(String downloadedID) {
 
-        for(int i = 0; i < surahs.size(); i++) {
+        for (int i = 0; i < surahs.size(); i++) {
             String id = null;
-            if (mReciterType.equals("PREF_RECITER_SHEIKH")) {
+            if (mReciterType.equals(PREF_RECITER_SHEIKH)) {
                 id = surahs.get(i).getFirstReciter();
-            } else if (mReciterType.equals("PREF_RECITER_NOURALLAH")) {
+            } else if (mReciterType.equals(PREF_RECITER_NOURALLAH)) {
                 id = surahs.get(i).getSecondReciter();
             }
-            if(downloadedID != null && id != null) {
+            if (downloadedID != null && id != null) {
                 if (id.equals(downloadedID)) {
                     surahs.get(i).setDownloaded(true);
                     break;
@@ -135,7 +134,6 @@ public class SongListActivity extends AppCompatActivity implements Constants {
         }
         mAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -182,8 +180,8 @@ public class SongListActivity extends AppCompatActivity implements Constants {
 
     private void filter(String filterString) {
         List<Surah> filters = new ArrayList<>();
-        for(Surah surah : surahs) {
-            if(surah.getTitleEnglish().contains(filterString)
+        for (Surah surah : surahs) {
+            if (surah.getTitleEnglish().contains(filterString)
                     || surah.getTitleArabic().contains(filterString)
                     || String.valueOf(surah.getId()).contains(filterString)) {
                 filters.add(surah);
