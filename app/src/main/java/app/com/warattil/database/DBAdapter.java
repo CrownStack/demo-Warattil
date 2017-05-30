@@ -1,14 +1,8 @@
 package app.com.warattil.database;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import app.com.warattil.model.Surah;
 
 public class DBAdapter extends SQLiteOpenHelper {
 
@@ -35,7 +29,7 @@ public class DBAdapter extends SQLiteOpenHelper {
     }
 
     public void openDatabase() {
-        if(mDatabase != null && mDatabase.isOpen()) {
+        if (mDatabase != null && mDatabase.isOpen()) {
             return;
         }
         String dbPath = mContext.getDatabasePath(DB_NAME).getPath();
@@ -43,7 +37,7 @@ public class DBAdapter extends SQLiteOpenHelper {
     }
 
     public void closeDatabase() {
-        if(mDatabase != null) {
+        if (mDatabase != null) {
             mDatabase.close();
         }
     }

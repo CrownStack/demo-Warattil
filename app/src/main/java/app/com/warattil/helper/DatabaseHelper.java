@@ -12,20 +12,16 @@ import app.com.warattil.model.Surah;
 
 public class DatabaseHelper {
 
-    private Context mContext;
-    private SQLiteDatabase mDatabase;
-
-    DBAdapter mDbAdapter ;
+    private final DBAdapter mDbAdapter ;
 
     public DatabaseHelper(Context context) {
-        this.mContext = context;
-        this.mDbAdapter = new DBAdapter(mContext);
+        this.mDbAdapter = new DBAdapter(context);
     }
 
     public List<Surah> getSurahList() {
         List<Surah> surahList = new ArrayList<>();
         mDbAdapter.openDatabase();
-        mDatabase = mDbAdapter.getReadableDatabase();
+        SQLiteDatabase mDatabase = mDbAdapter.getReadableDatabase();
         Cursor cursor = mDatabase.rawQuery(" SELECT * FROM SURAH ", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

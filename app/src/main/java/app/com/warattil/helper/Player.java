@@ -95,8 +95,8 @@ public class Player {
     }
 
     public void start() {
-        if(!mMediaPlayer.isPlaying()) mMediaPlayer.start();
-        mMediaPlayer.seekTo(0);
+        if (!mMediaPlayer.isPlaying()) mMediaPlayer.start();
+            mMediaPlayer.seekTo(0);
         if (mSeekbar != null) {
             mSeekbar.setMax(mMediaPlayer.getDuration());
             mSeekbar.setProgress(0);
@@ -110,7 +110,7 @@ public class Player {
     }
 
     public void repeat() {
-        if(!mMediaPlayer.isPlaying()) mMediaPlayer.start();
+        if (!mMediaPlayer.isPlaying()) mMediaPlayer.start();
         if (mSeekbar != null) {
             mSeekbar.setMax(mMediaPlayer.getDuration());
             mSeekbar.setProgress(0);
@@ -121,7 +121,7 @@ public class Player {
             imagePlayPause.setImageResource(R.drawable.ic_pause);
         }
         if (mHandler != null) mHandler.postDelayed(mUpdateTimeTask, 100);
-        mMediaPlayer.setLooping(true);
+            mMediaPlayer.setLooping(true);
     }
 
     public void stop() {
@@ -172,9 +172,9 @@ public class Player {
     MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(MediaPlayer mp) {
-            if(mMediaPlayer != null) textViewTotalTime.setText(getTimeString(mMediaPlayer.getDuration()));
+            if (mMediaPlayer != null) textViewTotalTime.setText(getTimeString(mMediaPlayer.getDuration()));
             if (imagePlayPause != null) imagePlayPause.setClickable(true);
-            start();
+               start();
         }
     };
 
@@ -219,11 +219,10 @@ public class Player {
     AudioManager.OnAudioFocusChangeListener audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         public void onAudioFocusChange(int focusChange) {
             if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
-                if(mMediaPlayer.isPlaying()) mMediaPlayer.pause();
+                if (mMediaPlayer.isPlaying()) mMediaPlayer.pause();
             } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-                if(mMediaPlayer.isPlaying()) mMediaPlayer.stop();
+                if (mMediaPlayer.isPlaying()) mMediaPlayer.stop();
             }
         }
     };
-
 }
