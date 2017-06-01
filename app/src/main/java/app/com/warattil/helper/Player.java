@@ -30,7 +30,7 @@ public class Player {
     private boolean isShuffle = false;
 
 
-    public Player(Context context, String url, SeekBar seekBar, TextView textViewTotalTime, ImageView imagePlayPause){
+    public Player(Context context, String url, SeekBar seekBar, TextView textViewTotalTime, ImageView imagePlayPause) {
         mContext = context;
         mUrl = url;
         mSeekbar = seekBar;
