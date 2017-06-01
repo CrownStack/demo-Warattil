@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,39 +56,32 @@ public class SongListActivity extends AppCompatActivity implements Constants {
         setContentView(R.layout.activity_song_list);
 
         ButterKnife.bind(this);
-        fetchData();
-        retrievePreference();
-
-        PermissionClass permission = new PermissionClass(this);
-        if (!permission.checkPermission(permissions)) {
-            permission.requestPermission(REQUEST_PERMISSION_CODE, permissions);
-        } else {
-            initView();
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LocalBroadcastManager.getInstance(this).registerReceiver(downloadReceiver, new IntentFilter(DOWNLOADED_ACTION));
+
+        fetchData();
+        retrievePreference();
+        PermissionClass permission = new PermissionClass(this);
+        if (!permission.checkPermission(permissions)) permission.requestPermission(REQUEST_PERMISSION_CODE, permissions);
+         else initView();
+
+        registerReceiver(downloadReceiver, new IntentFilter(DOWNLOADED_ACTION));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(downloadReceiver);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+        unregisterReceiver(downloadReceiver);
     }
 
     private void fetchData() {
         GetDetailAsync detailAsync = new GetDetailAsync(SongListActivity.this, new IResponseListener() {
             @Override
             public void success(List<Surah> success) {
-
+                surahs.clear();
                 surahs.addAll(success);
                 for (int i = 0; i < surahs.size(); i++) {
 
@@ -155,7 +149,6 @@ public class SongListActivity extends AppCompatActivity implements Constants {
         recyclerViewSurah.setLayoutManager(mLayoutManager);
         mAdapter = new SurahAdapter(SongListActivity.this, mLanguageType, mReciterType, surahs);
         recyclerViewSurah.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
         searchFilter();
     }
 
@@ -198,7 +191,6 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     @OnClick(R.id.image_view_setting)
     void clickSetting() {
         startActivity(new Intent(this, SettingActivity.class));
-        SongListActivity.this.finish();
     }
 
     @Override
