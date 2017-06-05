@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -47,24 +48,21 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
         radioGroupLanguage.setOnCheckedChangeListener(this);
         radioGroupReciter.setOnCheckedChangeListener(this);
+        if(AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).length() == 0 && AppPreference.getAppPreference(this).getString(PREF_RECITER).length() == 0) {
+            AppPreference.getAppPreference(SettingActivity.this).putString(PREF_LANGUAGE, PREF_LANGUAGE_ENGLISH);
+            AppPreference.getAppPreference(SettingActivity.this).putString(PREF_RECITER, PREF_RECITER_SHEIKH);
+        }
     }
 
     @OnClick(R.id.image_view_next)
     void clickNext() {
-        checkPreference();
+        goToSongListActivity();
     }
 
-    private void checkPreference() {
-        String storedLanguage = AppPreference.getAppPreference(this).getString(PREF_LANGUAGE);
-        String storedReciter  = AppPreference.getAppPreference(this).getString(PREF_RECITER);
-
-        if(storedLanguage.equals(PREF_LANGUAGE_ENGLISH) || storedLanguage.equals(PREF_LANGUAGE_ARABIC)) {
-            if(storedReciter.equals(PREF_RECITER_SHEIKH) || storedReciter.equals(PREF_RECITER_NOURALLAH)) {
+    private void goToSongListActivity() {
                 startActivity(new Intent(getApplicationContext(), SongListActivity.class));
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 SettingActivity.this.finish();
-            } else Message.message(getApplicationContext(), getString(R.string.select_reciter));
-        } else Message.message(getApplicationContext(), getString(R.string.select_language_reciter));
     }
 
     @Override
