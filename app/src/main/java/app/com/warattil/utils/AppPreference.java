@@ -28,4 +28,12 @@ public class AppPreference {
     public String getString(String key) {
        return sSharedPreferences.getString(key, "");
     }
+
+    public void putBoolean(String key, boolean value) {
+        mEditor.putBoolean(key, value);
+    }
+
+    public Boolean getBoolean(String key) {
+        return sSharedPreferences.getBoolean(key, false);
+    }
 }
