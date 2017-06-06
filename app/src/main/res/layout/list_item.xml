@@ -4,6 +4,7 @@
         android:layout_height="@dimen/_50sdp"
         android:orientation="horizontal"
         android:weightSum="1"
+        android:background="@drawable/selector_row"
         android:id="@+id/ll_item">
 
     <TextView

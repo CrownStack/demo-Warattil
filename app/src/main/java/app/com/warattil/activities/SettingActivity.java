@@ -1,10 +1,8 @@
 package app.com.warattil.activities;
 
 import android.content.Intent;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import app.com.warattil.R;
 import app.com.warattil.font.FontHelper;
-import app.com.warattil.helper.Message;
 import app.com.warattil.utils.AppPreference;
 import app.com.warattil.utils.Constants;
 
@@ -72,7 +69,7 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         switch(checkedId) {
 
