@@ -28,6 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activities.SplashSecondActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/NoActionBar"/>
         <activity
                 android:name=".activities.SongListActivity"
                 android:launchMode="singleInstance"

@@ -14,4 +14,5 @@ public interface Constants {
     String PREF_RECITER            = "PREF_RECITER";
     String PREF_RECITER_SHEIKH     = "PREF_RECITER_SHEIKH";
     String PREF_RECITER_NOURALLAH  = "PREF_RECITER_NOURALLAH";
+
 }

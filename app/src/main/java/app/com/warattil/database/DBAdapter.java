@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBAdapter extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "Quran2.sqlite";
-    public static final String DB_LOCATION = "/data/data/app.com.warattil/databases/";
+    public static final String DB_LOCATION = "/data/data/com.crownstack.surah/databases/";
     private static final int DB_VERSION = 1;
 
     private final Context mContext;

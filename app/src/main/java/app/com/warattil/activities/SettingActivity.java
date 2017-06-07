@@ -1,10 +1,8 @@
 package app.com.warattil.activities;
 
 import android.content.Intent;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 
 import app.com.warattil.R;
 import app.com.warattil.font.FontHelper;
-import app.com.warattil.helper.Message;
 import app.com.warattil.utils.AppPreference;
 import app.com.warattil.utils.Constants;
 
@@ -48,9 +45,15 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
         radioGroupLanguage.setOnCheckedChangeListener(this);
         radioGroupReciter.setOnCheckedChangeListener(this);
-        if(AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).length() == 0 && AppPreference.getAppPreference(this).getString(PREF_RECITER).length() == 0) {
+        if (AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).length() == 0 && AppPreference.getAppPreference(this).getString(PREF_RECITER).length() == 0) {
             AppPreference.getAppPreference(SettingActivity.this).putString(PREF_LANGUAGE, PREF_LANGUAGE_ENGLISH);
             AppPreference.getAppPreference(SettingActivity.this).putString(PREF_RECITER, PREF_RECITER_SHEIKH);
+        } else {
+            if (AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).equals(PREF_LANGUAGE_ENGLISH)) radioButtonEnglish.setChecked(true);
+            else if(AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).equals(PREF_LANGUAGE_ARABIC)) radioButtonArabic.setChecked(true);
+
+            if (AppPreference.getAppPreference(this).getString(PREF_RECITER).equals(PREF_RECITER_SHEIKH)) radioButtonSheikh.setChecked(true);
+            else if(AppPreference.getAppPreference(this).getString(PREF_RECITER).equals(PREF_RECITER_NOURALLAH)) radioButtonNourallah.setChecked(true);
         }
     }
 
@@ -66,7 +69,7 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         switch(checkedId) {
 
