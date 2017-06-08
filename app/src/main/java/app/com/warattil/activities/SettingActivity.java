@@ -48,9 +48,15 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
         radioGroupLanguage.setOnCheckedChangeListener(this);
         radioGroupReciter.setOnCheckedChangeListener(this);
-        if(AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).length() == 0 && AppPreference.getAppPreference(this).getString(PREF_RECITER).length() == 0) {
+        if (AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).length() == 0 && AppPreference.getAppPreference(this).getString(PREF_RECITER).length() == 0) {
             AppPreference.getAppPreference(SettingActivity.this).putString(PREF_LANGUAGE, PREF_LANGUAGE_ENGLISH);
             AppPreference.getAppPreference(SettingActivity.this).putString(PREF_RECITER, PREF_RECITER_SHEIKH);
+        } else {
+            if (AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).equals(PREF_LANGUAGE_ENGLISH)) radioButtonEnglish.setChecked(true);
+            else if(AppPreference.getAppPreference(this).getString(PREF_LANGUAGE).equals(PREF_LANGUAGE_ARABIC)) radioButtonArabic.setChecked(true);
+
+            if (AppPreference.getAppPreference(this).getString(PREF_RECITER).equals(PREF_RECITER_SHEIKH)) radioButtonSheikh.setChecked(true);
+            else if(AppPreference.getAppPreference(this).getString(PREF_RECITER).equals(PREF_RECITER_NOURALLAH)) radioButtonNourallah.setChecked(true);
         }
     }
 
