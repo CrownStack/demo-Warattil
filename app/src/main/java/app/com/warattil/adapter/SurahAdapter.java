@@ -19,6 +19,8 @@ import app.com.warattil.BuildConfig;
 import app.com.warattil.R;
 import app.com.warattil.activities.MediaPlayerActivity;
 import app.com.warattil.font.FontHelper;
+import app.com.warattil.helper.Message;
+import app.com.warattil.helper.NetworkHelper;
 import app.com.warattil.model.Surah;
 import app.com.warattil.utils.Constants;
 import app.com.warattil.utils.DownloadingTask;
@@ -84,26 +86,27 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.ViewHolder> 
         }
 
         @OnClick(R.id.ll_item) void clickItem() {
-            Surah surah = mSurahs.get(position);
+                Surah surah = mSurahs.get(position);
 
-            boolean isSheikh = mReciterType.equals(PREF_RECITER_SHEIKH);
-            String prayerUrl = (isSheikh ? surah.getFirstReciter() : surah.getSecondReciter());
-            String hostUrl = (isSheikh ? BuildConfig.HOST_URL : BuildConfig.HOST_URL_TWO);
+                boolean isSheikh = mReciterType.equals(PREF_RECITER_SHEIKH);
+                String prayerUrl = (isSheikh ? surah.getFirstReciter() : surah.getSecondReciter());
+                String hostUrl = (isSheikh ? BuildConfig.HOST_URL : BuildConfig.HOST_URL_TWO);
 
-            if (!surah.isDownloaded()) {
-                DownloadingTask.getInstance(mContext).startDownload(hostUrl, prayerUrl, surah.getId());
-            } else {
-                String mLanguage;
-                boolean isArabic = mLanguageType.equals(PREF_LANGUAGE_ARABIC);
+                if (!surah.isDownloaded()) {
+                    if(NetworkHelper.isOn(mContext)) DownloadingTask.getInstance(mContext).startDownload(hostUrl, prayerUrl, surah.getId());
+                    else Message.message(mContext, mContext.getString(R.string.check_connection));
+                } else {
+                    String mLanguage;
+                    boolean isArabic = mLanguageType.equals(PREF_LANGUAGE_ARABIC);
                     mLanguage = (isArabic ? surah.getTitleArabic() : surah.getTitleEnglish());
 
-                Intent mediaIntent = new Intent(mContext, MediaPlayerActivity.class);
-                mediaIntent.putExtra("songName", mLanguage);
-                mediaIntent.putExtra("reciter", mReciterType);
-                mediaIntent.putExtra("fileName", prayerUrl);
-                mediaIntent.putExtra("DownloadedList", (Serializable) mSurahs);
-                mContext.startActivity(mediaIntent);
-            }
+                    Intent mediaIntent = new Intent(mContext, MediaPlayerActivity.class);
+                    mediaIntent.putExtra("songName", mLanguage);
+                    mediaIntent.putExtra("reciter", mReciterType);
+                    mediaIntent.putExtra("fileName", prayerUrl);
+                    mediaIntent.putExtra("DownloadedList", (Serializable) mSurahs);
+                    mContext.startActivity(mediaIntent);
+                }
         }
     }
 
