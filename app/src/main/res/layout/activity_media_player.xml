@@ -42,7 +42,7 @@
 
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_250sdp"
+                android:layout_height="@dimen/_240sdp"
                 android:contentDescription="@string/desc"
                 android:src="@drawable/ic_launcher_app"/>
 
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_view_time"
                     android:gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:orientation="vertical">
 
             <TextView
@@ -90,11 +90,12 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_normal_size"
                     android:textColor="@color/colorCoralTree"
-                    android:text="@string/sheikh_maher"/>
+                    android:text="@string/nourallah"/>
             </LinearLayout>
 
 
             <ImageView
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:id="@+id/image_view_reverse"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
