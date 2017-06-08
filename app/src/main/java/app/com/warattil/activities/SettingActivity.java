@@ -74,22 +74,18 @@ public class SettingActivity extends AppCompatActivity implements RadioGroup.OnC
 
             case R.id.radio_button_english:
                 AppPreference.getAppPreference(SettingActivity.this).putString(PREF_LANGUAGE, PREF_LANGUAGE_ENGLISH);
-                if(radioButtonEnglish.isChecked()) radioButtonEnglish.setSelected(true);
                 break;
 
             case R.id.radio_button_arabic:
                 AppPreference.getAppPreference(SettingActivity.this).putString(PREF_LANGUAGE, PREF_LANGUAGE_ARABIC);
-                if(radioButtonArabic.isChecked()) radioButtonArabic.setSelected(true);
                 break;
 
             case R.id.radio_button_sheikh:
                 AppPreference.getAppPreference(SettingActivity.this).putString(PREF_RECITER, PREF_RECITER_SHEIKH);
-                if(radioButtonSheikh.isChecked()) radioButtonSheikh.setSelected(true);
                 break;
 
             case R.id.radio_button_nourallah:
                 AppPreference.getAppPreference(SettingActivity.this).putString(PREF_RECITER, PREF_RECITER_NOURALLAH);
-                if(radioButtonNourallah.isChecked()) radioButtonNourallah.setSelected(true);
                 break;
         }
     }
