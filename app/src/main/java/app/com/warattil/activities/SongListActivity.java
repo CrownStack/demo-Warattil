@@ -83,13 +83,9 @@ public class SongListActivity extends AppCompatActivity implements Constants {
                 for (int i = 0; i < surahs.size(); i++) {
 
                     if (mReciterType.equals(PREF_RECITER_SHEIKH)) {
-                        if (DownloadingTask.checkIsDownload(surahs.get(i).getFirstReciter())) {
-                            surahs.get(i).setDownloaded(true);
-                        }
+                        if (DownloadingTask.checkIsDownload(surahs.get(i).getFirstReciter())) surahs.get(i).setDownloaded(true);
                     } else if (mReciterType.equals(PREF_RECITER_NOURALLAH)) {
-                        if (DownloadingTask.checkIsDownload(surahs.get(i).getSecondReciter())) {
-                            surahs.get(i).setDownloaded(true);
-                        }
+                        if (DownloadingTask.checkIsDownload(surahs.get(i).getSecondReciter())) surahs.get(i).setDownloaded(true);
                     }
                 }
             }
@@ -100,10 +96,7 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     private final BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.hasExtra(Constants.DOWNLOAD_ID)) {
-                String downloadedId = intent.getStringExtra(Constants.DOWNLOAD_ID);
-                updateList(downloadedId);
-            }
+            if (intent.hasExtra(Constants.DOWNLOAD_ID)) updateList(intent.getStringExtra(Constants.DOWNLOAD_ID));
         }
     };
 
@@ -132,9 +125,10 @@ public class SongListActivity extends AppCompatActivity implements Constants {
 
         switch (requestCode) {
             case REQUEST_PERMISSION_CODE : {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
-                    initView();
-                }
+                if(grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[1] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[2] == PackageManager.PERMISSION_GRANTED) initView();
             }
         }
     }
@@ -171,11 +165,9 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     private void filter(String filterString) {
         List<Surah> filters = new ArrayList<>();
         for (Surah surah : surahs) {
-            if (surah.getTitleEnglish().contains(filterString)
-                    || surah.getTitleArabic().contains(filterString)
-                    || String.valueOf(surah.getId()).contains(filterString)) {
-                filters.add(surah);
-            }
+            if (surah.getTitleEnglish().toLowerCase().contains(filterString.toLowerCase())
+                    || surah.getTitleArabic().toLowerCase().contains(filterString.toLowerCase())
+                    || String.valueOf(surah.getId()).contains(filterString)) filters.add(surah);
         }
         mAdapter.updateList(filters);
     }
@@ -183,6 +175,9 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     private void retrievePreference() {
         mLanguageType = AppPreference.getAppPreference(SongListActivity.this).getString(PREF_LANGUAGE);
         mReciterType = AppPreference.getAppPreference(SongListActivity.this).getString(PREF_RECITER);
+
+        boolean isArabic = mLanguageType.equals(PREF_LANGUAGE_ARABIC);
+        editTextSearch.setHint(isArabic ? getString(R.string.search_arabic) : getString(R.string.search));
     }
 
     @OnClick(R.id.image_view_setting)
@@ -193,7 +188,6 @@ public class SongListActivity extends AppCompatActivity implements Constants {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) SongListActivity.this.finish();
-
         return super.onKeyDown(keyCode, event);
     }
 }

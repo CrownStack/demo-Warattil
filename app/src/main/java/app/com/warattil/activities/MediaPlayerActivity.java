@@ -31,6 +31,7 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
     @BindView(R.id.image_view_forward) ImageView imageViewForward;
     @BindView(R.id.image_view_repeat) ImageView imageViewRepeat;
     @BindView(R.id.seek_bar) SeekBar seekBar;
+    @BindView(R.id.text_view_playing) TextView textViewPlaying;
     @BindView(R.id.text_view_time) TextView textViewTime;
     @BindView(R.id.text_view_title) TextView textViewTitle;
     @BindView(R.id.text_view_song) TextView textViewSong;
@@ -57,6 +58,8 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
 
     private void retrieveLanguage() {
         mLanguageType = AppPreference.getAppPreference(MediaPlayerActivity.this).getString(PREF_LANGUAGE);
+        boolean isArabic = mLanguageType.equals(PREF_LANGUAGE_ARABIC);
+        textViewPlaying.setText(isArabic ? getString(R.string.now_playing_arabic) : getString(R.string.nowPlaying));
     }
 
     @SuppressWarnings("unchecked")
@@ -70,8 +73,8 @@ public class MediaPlayerActivity extends AppCompatActivity implements Constants 
             File file = new File(Environment.getExternalStorageDirectory() + PRAYER_DIR_PATH +"/" + mFileName);
             mUrl = file.getAbsolutePath();
             textViewSong.setText(mMusicTitle);
-            if(mReciter.equals(PREF_RECITER_NOURALLAH)) textViewTitle.setText(getString(R.string.nourallah));
-            else textViewTitle.setText(getString(R.string.sheikh));
+            boolean isNourallah = mReciter.equals(PREF_RECITER_NOURALLAH);
+            textViewTitle.setText(isNourallah ? getString(R.string.nourallah): getString(R.string.sheikh));
             mPlayer = new Player(this, mUrl, seekBar, textViewTime, imageViewPlayPause);
         }
     }
