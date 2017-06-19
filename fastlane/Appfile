@@ -1,0 +1,2 @@
+json_key_file "/home/crownstack/Downloads/Google\ Play\ Android\ Developer-3d230f9d883b.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
+package_name "com.crownstack.surah" # e.g. com.krausefx.app

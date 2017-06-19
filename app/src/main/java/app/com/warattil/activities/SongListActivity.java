@@ -47,6 +47,7 @@ public class SongListActivity extends AppCompatActivity implements Constants {
    private final String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
     private final int REQUEST_PERMISSION_CODE = 200;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
