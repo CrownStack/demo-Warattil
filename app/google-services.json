@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1044885934231",
+    "firebase_url": "https://surah-472f0.firebaseio.com",
+    "project_id": "surah-472f0",
+    "storage_bucket": "surah-472f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044885934231:android:cb0d75ccf5edd144",
+        "android_client_info": {
+          "package_name": "com.crownstack.surah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044885934231-4eth6dnkndhg8kr9q2opp7t1rojpfk8p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.crownstack.surah",
+            "certificate_hash": "b88ee19a4e441ef02cbb66e4995f36db06659b2d"
+          }
+        },
+        {
+          "client_id": "1044885934231-js5cqoagc2vurukthltmrnn8aj9fctrv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4jq_Nv3aXV29BfoaIMpeZ_DOvV942rl4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044885934231-js5cqoagc2vurukthltmrnn8aj9fctrv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

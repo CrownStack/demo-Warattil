@@ -7,15 +7,24 @@ android {
         applicationId "com.crownstack.surah"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.0.3"
+        versionCode 7
+        versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+    }
+    signingConfigs {
+        release {
+            storeFile file("/home/crownstack/Desktop/Surah_keystore/Surah.jks")
+            storePassword "crownstack"
+            keyAlias "Surahkeystore"
+            keyPassword "crownstack"
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -34,7 +43,6 @@ dependencies {
     })
 
     compile 'com.android.support:appcompat-v7:25.3.1'
-//    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
@@ -42,4 +50,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.firebase:firebase-core:10.2.6'
 }
+apply plugin: 'com.google.gms.google-services'
