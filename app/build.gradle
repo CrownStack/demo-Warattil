@@ -8,14 +8,23 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 5
-        versionName "1.0.3"
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+    }
+    signingConfigs {
+        release {
+            storeFile file("/home/crownstack/ImpFiles/Surah.jks")
+            storePassword "crownstack"
+            keyAlias "Surahkeystore"
+            keyPassword "crownstack"
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
